@@ -9,8 +9,17 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
     PyObject *lst;
     if (!PyArg_ParseTuple(args, "O", &lst))
         return NULL;
+    if (!PyList_Check(lst)) {
+        PyErr_SetString(PyExc_ValueError, "expected a list");
+        return NULL;
+    }
 
     Py_ssize_t len = PyList_Size(lst);
+    if (len < 2) {
+        PyErr_SetString(PyExc_ValueError, "expected a list of length >=2");
+        return NULL;
+    }
+
     std::vector<double> xs;
     xs.reserve(len);
     for (Py_ssize_t idx = 0; idx < len; ++idx) {
@@ -21,8 +30,6 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
 
     double ret = fun(xs);
     PyObject *v = Py_BuildValue("d", ret);
-    if (NULL == v)
-        return NULL;
     return v;
 }
 }

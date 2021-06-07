@@ -10,7 +10,7 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
     if (!PyArg_ParseTuple(args, "O", &lst))
         return NULL;
     if (!PyList_Check(lst)) {
-        PyErr_SetString(PyExc_ValueError, "expected a list");
+        PyErr_SetString(PyExc_TypeError, "expected a list");
         return NULL;
     }
 

@@ -8,11 +8,10 @@ extra_compile_args += ["-std=c++17", "-Wall", "-Wextra"]
 setup(name='cbench',
       ext_modules=[
           Extension('cbench'
-                    , ['cbench.cpp', 'bss.cpp']
+                    , ['cbench.cc', 'bss.cc']
                     , extra_compile_args=extra_compile_args
                     , libraries=['stdc++']
                     , language='c++17'
           )
       ]
 )
-

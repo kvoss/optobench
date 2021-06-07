@@ -1,6 +1,5 @@
 #include "Python.h"
-#include <vector>
-#include "bss.hpp"
+#include "bss.h"
 
 namespace {
 PyObject *

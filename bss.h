@@ -1,5 +1,5 @@
-#ifndef _BSS_HPP
-#define _BSS_HPP
+#ifndef _BSS_H
+#define _BSS_H
 
 #include <vector>
 
@@ -27,5 +27,5 @@ double sphere(const std::vector<double>& xs);
 double tripod(const std::vector<double>& xs);
 double trefethen4(const std::vector<double>& xs);
 
-#endif // _BSS_HPP
+#endif // _BSS_H
 

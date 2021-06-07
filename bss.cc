@@ -1,6 +1,6 @@
 #include <cmath>
 #include <stdexcept>
-#include "bss.hpp"
+#include "bss.h"
 
 namespace {
 const double e = std::exp(1.);

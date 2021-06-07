@@ -20,7 +20,7 @@ print(cb.michalewicz(xs))
 ## List of functions
 
 ```
-_ dejong2 # this would be the same as parabola
+_ dejong2 # this is the same as parabola
 x dejong5
 x ackley
 x alpine
@@ -56,11 +56,15 @@ x trefethen4
 - [K.Voss 2016](https://harvest.usask.ca/handle/10388/7746)
     pythOPT: A problem-solving environment for optimization methods
 
-- [Jamil, Yang 2013](https://arxiv.org/abs/1308.4008)
+- [Momin Jamil, Xin-She Yang 2013](https://arxiv.org/abs/1308.4008)
     A Literature Survey of Benchmark Functions For Global Optimization Problems
-    Momin Jamil, Xin-She Yang, 2013
+
+- [Optimization Test Problems, SFU](https://www.sfu.ca/~ssurjano/optimization.html)
 
 - [Extending Python](https://docs.python.org/3/extending/extending.html)
 
 - [C++ cmath](https://www.cplusplus.com/reference/cmath/)
 
+- [CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md)
+
+- [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)

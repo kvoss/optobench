@@ -192,6 +192,7 @@ static PyMethodDef CBenchMethods[] = {
     {NULL, NULL, 0, NULL}
 };
 
+// Module definition
 static struct PyModuleDef cModPyDem =
 {
     PyModuleDef_HEAD_INIT,
@@ -202,6 +203,7 @@ static struct PyModuleDef cModPyDem =
 };
 
 
+// Module initialization
 // Python 3.x
 PyMODINIT_FUNC PyInit_cbench(void)
 {

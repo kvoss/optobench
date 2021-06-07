@@ -1,3 +1,4 @@
+echo "Sanity tests.."
 python -c 'import cbench as cb
 
 xs = [0.1, 0.2, 0.3, 0.4, 0.51]
@@ -10,3 +11,7 @@ for el in dir(cb):
     print(ans)
 
 '
+
+echo "Timing test.."
+python -m timeit -s 'from cbench import michalewicz; xs = [0.1, 0.2, 0.3, 0.4, 0.51]' 'michalewicz(xs)'
+

@@ -3,7 +3,7 @@ from distutils.core import setup, Extension
 
 # extra_compile_args = sysconfig.get_config_var('CFLAGS').split()
 extra_compile_args = []
-extra_compile_args += ["-std=c++11", "-Wall", "-Wextra"]
+extra_compile_args += ["-std=c++17", "-Wall", "-Wextra"]
 
 setup(name='cbench',
       ext_modules=[
@@ -11,7 +11,7 @@ setup(name='cbench',
                     , ['cbench.cpp', 'bss.cpp']
                     , extra_compile_args=extra_compile_args
                     , libraries=['stdc++']
-                    , language='c++11'
+                    , language='c++17'
           )
       ]
 )

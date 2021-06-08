@@ -94,7 +94,7 @@ holder_table(const std::vector<double>& xs)
     double x2 = xs.at(1);
 
     double ret = -1.*std::abs(\
-        std::sin(x1)*std::cos(x2)*std::exp(std::abs(1.-std::sqrt(x1*x1+x2*x2)/pi)))
+        std::sin(x1)*std::cos(x2)*std::exp(std::abs(1.-std::sqrt(x1*x1+x2*x2)/pi)));
     return ret;
 }
 

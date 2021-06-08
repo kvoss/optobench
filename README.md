@@ -52,8 +52,8 @@ x trefethen4
 ```
 
 ## TODO:
-* check for empty lists in the benchmark functions
-* add unit tests
+- [X] check for empty lists in the benchmark functions
+- [ ] add unit tests
 
 
 ## References

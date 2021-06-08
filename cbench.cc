@@ -46,6 +46,12 @@ py_alpine(PyObject *self, PyObject *args)
 }
 
 PyObject *
+py_bukin_f6(PyObject *self, PyObject *args)
+{
+    return py_bench(self, args, bukin_f6);
+}
+
+PyObject *
 py_six_hump_camel_back(PyObject *self, PyObject *args)
 {
     return py_bench(self, args, six_hump_camel_back);
@@ -174,6 +180,7 @@ py_trefethen4(PyObject *self, PyObject *args)
 static PyMethodDef CBenchMethods[] = {
     {"ackley", py_ackley, METH_VARARGS, "Ackley function"},
     {"alpine", py_alpine, METH_VARARGS, "Alpine function"},
+    {"bukin_f6", py_bukin_f6, METH_VARARGS, "Bukin function 6"},
     {"six_hump_camel_back", py_six_hump_camel_back, METH_VARARGS, "six_hump_camel_back function"},
     {"dejong5", py_dejong5, METH_VARARGS, "dejong5 function"},
     {"deceptive3", py_deceptive3, METH_VARARGS, "deceptive3 function"},

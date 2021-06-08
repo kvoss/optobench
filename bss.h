@@ -5,6 +5,11 @@
 
 double ackley(const std::vector<double>& xs);
 double alpine(const std::vector<double>& xs);
+double bukin_f6(const std::vector<double>& xs);
+double cross_in_tray(const std::vector<double>& xs);
+double eggholder(const std::vector<double>& xs);
+double gramacy_lee(const std::vector<double>& xs);
+double holder_table(const std::vector<double>& xs);
 double six_hump_camel_back(const std::vector<double>& xs);
 double dejong5(const std::vector<double>& xs);
 double deceptive3(const std::vector<double>& xs);

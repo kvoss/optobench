@@ -33,6 +33,72 @@ alpine(const std::vector<double>& xs)
     return acc0;
 }
 
+
+double
+bukin_f6(const std::vector<double>& xs)
+{
+    // The function is usually evaluated on the rectangle x1 ∈ [-15, -5], x2 ∈ [-3, 3].
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = 100.*std::sqrt(std::abs(x2 - 0.01*x1*x1)) \
+                 + 0.01*std::abs(x1 + 10.);
+    return ret;
+}
+
+
+double
+cross_in_tray(const std::vector<double>& xs)
+{
+    // The function is usually evaluated on the square xi ∈ [-10, 10], for all i = 1, 2
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = -0.0001*std::pow(std::abs( \
+        std::sin(x1)*std::sin(x2)*std::exp(\
+            std::abs(100. - std::sqrt(x1*x1 + x2*x2)/pi) \
+        )) + 1., 0.1);
+    return ret;
+}
+
+
+double
+eggholder(const std::vector<double>& xs)
+{
+    // The function is usually evaluated on the square xi ∈ [-512, 512], for all i = 1, 2.
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = -1.*(x2 + 47.)*std::sin(std::sqrt(std::abs(x2+x1/2.+47.))) \
+                 - x1*std::sin(std::sqrt(std::abs(x1-(x2+47.))));
+    return ret;
+}
+
+
+double
+gramacy_lee(const std::vector<double>& xs)
+{
+    // The function is usually evaluated on the x ∈ [0.5, 2.5].
+    double x1 = xs.at(0);
+
+    double ret = std::sin(10.*pi*x1)/2.*x1 + std::pow(x1-1., 4);
+    return ret;
+}
+
+
+double
+holder_table(const std::vector<double>& xs)
+{
+    // The function is usually evaluated on the square xi ∈ [-10, 10], for all i = 1, 2
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = -1.*std::abs(\
+        std::sin(x1)*std::cos(x2)*std::exp(std::abs(1.-std::sqrt(x1*x1+x2*x2)/pi)))
+    return ret;
+}
+
+
 double
 six_hump_camel_back(const std::vector<double>& xs)
 {
@@ -411,7 +477,7 @@ trefethen4(const std::vector<double>& xs)
 //     std::vector<double> v{-3., 17.};
 //     std::vector<double> v2{-3., 17., 18};
 // 
-//     for (size_t n=0; n<1000000; ++n) {
+//     for (size_t n=0; n<1'000'000; ++n) {
 //         sum += ackley(v2);
 //         sum += alpine(v2);
 //         sum += six_hump_camel_back(v);

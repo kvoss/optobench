@@ -20,10 +20,15 @@ print(cb.michalewicz(xs))
 ## List of functions
 
 ```
-_ dejong2 # this is the same as parabola
+x dejong2 # this is the same as parabola
 x dejong5
 x ackley
 x alpine
+x bukin_f6
+x cross_in_tray
+x eggholder
+x gramacy_lee
+x holder_table
 x six_hump_camel_back
 x deceptive3
 x drop_wave

@@ -33,154 +33,50 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
 }
 }
 
-PyObject *
-py_ackley(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, ackley);
-}
 
-PyObject *
-py_alpine(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, alpine);
-}
+#ifndef PYWRAP
+#define PYWRAP( name )  PyObject* py_ ## name (PyObject *self, PyObject *args){return py_bench(self, args, name);}
+#endif
 
-PyObject *
-py_bukin_f6(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, bukin_f6);
-}
 
-PyObject *
-py_six_hump_camel_back(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, six_hump_camel_back);
-}
+PYWRAP(ackley);
+PYWRAP(alpine);
+PYWRAP(bukin_f6);
+PYWRAP(cross_in_tray);
+PYWRAP(eggholder);
+PYWRAP(gramacy_lee);
+PYWRAP(holder_table);
+PYWRAP(six_hump_camel_back);
+PYWRAP(dejong5);
+PYWRAP(deceptive3);
+PYWRAP(drop_wave);
+PYWRAP(easom);
+PYWRAP(penalty1);
+PYWRAP(parabola);
+PYWRAP(michalewicz);
+PYWRAP(non_cont_rastrigin);
+PYWRAP(rastrigin);
+PYWRAP(rosenbrock);
+PYWRAP(griewank);
+PYWRAP(goldstein_price);
+PYWRAP(axis_parallel_hyperellipsoid);
+PYWRAP(step);
+PYWRAP(schaffers_f6);
+PYWRAP(schwefels_p222);
+PYWRAP(shubert);
+PYWRAP(sphere);
+PYWRAP(tripod);
+PYWRAP(trefethen4);
 
-PyObject *
-py_dejong5(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, dejong5);
-}
-
-PyObject *
-py_deceptive3(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, deceptive3);
-}
-
-PyObject *
-py_drop_wave(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, drop_wave);
-}
-
-PyObject *
-py_easom(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, easom);
-}
-
-PyObject *
-py_penalty1(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, penalty1);
-}
-
-PyObject *
-py_parabola(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, parabola);
-}
-
-PyObject *
-py_michalewicz(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, michalewicz);
-}
-
-PyObject *
-py_non_cont_rastrigin(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, rastrigin);
-}
-
-PyObject *
-py_rastrigin(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, rastrigin);
-}
-
-PyObject *
-py_rosenbrock(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, rosenbrock);
-}
-
-PyObject *
-py_griewank(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, griewank);
-}
-
-PyObject *
-py_goldstein_price(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, goldstein_price);
-}
-
-PyObject *
-py_axis_parallel_hyperellipsoid(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, axis_parallel_hyperellipsoid);
-}
-
-PyObject *
-py_step(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, step);
-}
-
-PyObject *
-py_schaffers_f6(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, schaffers_f6);
-}
-
-PyObject *
-py_schwefels_p222(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, schwefels_p222);
-}
-
-PyObject *
-py_shubert(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, shubert);
-}
-
-PyObject *
-py_sphere(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, sphere);
-}
-
-PyObject *
-py_tripod(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, tripod);
-}
-
-PyObject *
-py_trefethen4(PyObject *self, PyObject *args)
-{
-    return py_bench(self, args, trefethen4);
-}
 
 static PyMethodDef CBenchMethods[] = {
     {"ackley", py_ackley, METH_VARARGS, "Ackley function"},
     {"alpine", py_alpine, METH_VARARGS, "Alpine function"},
     {"bukin_f6", py_bukin_f6, METH_VARARGS, "Bukin function 6"},
+    {"cross_in_tray", py_cross_in_tray, METH_VARARGS, "cross_in_tray function"},
+    {"eggholder", py_eggholder, METH_VARARGS, "eggholder function"},
+    {"gramacy_lee", py_gramacy_lee, METH_VARARGS, "Gramacy Lee function"},
+    {"holder_table", py_holder_table, METH_VARARGS, "holder table function"},
     {"six_hump_camel_back", py_six_hump_camel_back, METH_VARARGS, "six_hump_camel_back function"},
     {"dejong5", py_dejong5, METH_VARARGS, "dejong5 function"},
     {"deceptive3", py_deceptive3, METH_VARARGS, "deceptive3 function"},

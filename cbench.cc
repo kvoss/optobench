@@ -1,9 +1,9 @@
+#define PY_SSIZE_T_CLEAN  /* Make "s#" use Py_ssize_t rather than int. */
 #include "Python.h"
 #include "bss.h"
 
 
-namespace {
-PyObject *
+static PyObject *
 py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
 {
     PyObject *lst;
@@ -32,11 +32,9 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
     PyObject *v = Py_BuildValue("d", ret);
     return v;
 }
-}
-
 
 #ifndef PYWRAP
-#define PYWRAP( name )  PyObject* py_ ## name (PyObject *self, PyObject *args){return py_bench(self, args, name);}
+#define PYWRAP( name ) static PyObject *py_ ## name (PyObject *self, PyObject *args) {return py_bench(self, args, name);}
 #endif
 
 PYWRAP(ackley);
@@ -71,7 +69,8 @@ PYWRAP(tripod);
 PYWRAP(trefethen4);
 
 
-static PyMethodDef CBenchMethods[] = {
+static PyMethodDef
+CBenchMethods[] = {
     {"ackley", py_ackley, METH_VARARGS, "Ackley function"},
     {"alpine", py_alpine, METH_VARARGS, "Alpine function"},
     {"bukin_f6", py_bukin_f6, METH_VARARGS, "Bukin function 6"},
@@ -106,21 +105,24 @@ static PyMethodDef CBenchMethods[] = {
 };
 
 // Module definition
-static struct PyModuleDef cModPyDem =
-{
+static struct PyModuleDef
+cModPyDem = {
     PyModuleDef_HEAD_INIT,
-    "cbench", /* name of module */
-    "",          /* module documentation, may be NULL */
-    -1,          /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+    "cbench", /* name of the module */
+    "Python interface for the C++ benchmark optimization functions",  /* module documentation, may be NULL */
+    -1,       /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
     CBenchMethods
 };
 
 
 // Module initialization
 // Python 3.x
-PyMODINIT_FUNC PyInit_cbench(void)
+PyMODINIT_FUNC
+PyInit_cbench(void)
 {
-    return PyModule_Create(&cModPyDem);
+    PyObject *module = PyModule_Create(&cModPyDem);
+    PyModule_AddStringConstant(module, "__version__", "0.1.0");
+    return module;
 }
 
 // Python 2.x

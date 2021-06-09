@@ -29,6 +29,8 @@ x cross_in_tray
 x eggholder
 x gramacy_lee
 x holder_table
+x levy
+x levy13
 x six_hump_camel_back
 x deceptive3
 x drop_wave

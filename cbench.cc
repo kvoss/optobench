@@ -1,6 +1,7 @@
 #include "Python.h"
 #include "bss.h"
 
+
 namespace {
 PyObject *
 py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
@@ -38,7 +39,6 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
 #define PYWRAP( name )  PyObject* py_ ## name (PyObject *self, PyObject *args){return py_bench(self, args, name);}
 #endif
 
-
 PYWRAP(ackley);
 PYWRAP(alpine);
 PYWRAP(bukin_f6);
@@ -46,6 +46,8 @@ PYWRAP(cross_in_tray);
 PYWRAP(eggholder);
 PYWRAP(gramacy_lee);
 PYWRAP(holder_table);
+PYWRAP(levy);
+PYWRAP(levy13);
 PYWRAP(six_hump_camel_back);
 PYWRAP(dejong5);
 PYWRAP(deceptive3);
@@ -77,6 +79,8 @@ static PyMethodDef CBenchMethods[] = {
     {"eggholder", py_eggholder, METH_VARARGS, "eggholder function"},
     {"gramacy_lee", py_gramacy_lee, METH_VARARGS, "Gramacy Lee function"},
     {"holder_table", py_holder_table, METH_VARARGS, "holder table function"},
+    {"levy", py_levy, METH_VARARGS, "levy function"},
+    {"levy13", py_levy13, METH_VARARGS, "levy13 function"},
     {"six_hump_camel_back", py_six_hump_camel_back, METH_VARARGS, "six_hump_camel_back function"},
     {"dejong5", py_dejong5, METH_VARARGS, "dejong5 function"},
     {"deceptive3", py_deceptive3, METH_VARARGS, "deceptive3 function"},

@@ -12,6 +12,6 @@ for el in dir(cb):
 
 '
 
-echo "Timing test.."
-python -m timeit -s 'from cbench import michalewicz; xs = [0.1, 0.2, 0.3, 0.4, 0.51]' 'michalewicz(xs)'
+# echo "Timing test.."
+# python -m timeit -s 'from cbench import michalewicz; xs = [0.1, 0.2, 0.3, 0.4, 0.51]' 'michalewicz(xs)'
 

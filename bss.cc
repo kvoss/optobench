@@ -100,6 +100,44 @@ holder_table(const std::vector<double>& xs)
 
 
 double
+levy(const std::vector<double>& xs)
+{
+    // The function is usually evaluated on the hypercube xi ∈ [-10, 10], for all i = 1, ..., d
+    const std::size_t len_xs = xs.size();
+    std::vector<double> ws(len_xs, 0.);
+
+    double ret = 0.;
+    for (std::size_t i=0; i < len_xs; ++i) {
+        ws[i] = 1. + (xs[i] - 1.)/4.;
+
+        if (i == (len_xs-1))
+            continue;
+
+        ret += (ws[i]-1.)*(ws[i]-1.) \
+                * (1. + 10.*std::sin(pi*ws[i]+1.)*std::sin(pi*ws[i]+1.));
+    }
+    ret += std::sin(pi*ws[0])*std::sin(pi*ws[0]) + \
+            + (ws[len_xs-1]-1.)*(ws[len_xs-1]-1.) \
+            * (1. + std::sin(2.*pi*ws[len_xs-1])*std::sin(2.*pi*ws[len_xs-1]));
+    return ret;
+}
+
+
+double
+levy13(const std::vector<double>& xs)
+{
+    // The function is usually evaluated on the square xi ∈ [-10, 10], for all i = 1, 2
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = std::sin(3.*pi*x1) * std::sin(3.*pi*x1) \
+                 + (x1 - 1.) * (x1 - 1.) * (1. + std::sin(3.*pi*x2)*std::sin(3.*pi*x2)) \
+                 + (x2 - 1.) * (x2 - 1.) * (1. + std::sin(2.*pi*x2)*std::sin(2.*pi*x2));
+    return ret;
+}
+
+
+double
 six_hump_camel_back(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);

@@ -7,12 +7,16 @@ const double e = std::exp(1.);
 const double pi = std::acos(-1.);
 }
 
+
+#define SQ(x) (x) * (x)
+
+
 double
 ackley(const std::vector<double>& xs)
 {
     double acc0 = 0., acc1 = 0.;
     for (auto &&x: xs) {
-        acc0 += x*x;
+        acc0 += SQ(x);
         acc1 += std::cos(2.*pi*x);
     }
     acc0 /= xs.size();
@@ -41,7 +45,7 @@ bukin_f6(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    double ret = 100.*std::sqrt(std::abs(x2 - 0.01*x1*x1)) \
+    double ret = 100.*std::sqrt(std::abs(x2 - 0.01*SQ(x1))) \
                  + 0.01*std::abs(x1 + 10.);
     return ret;
 }
@@ -56,7 +60,7 @@ cross_in_tray(const std::vector<double>& xs)
 
     double ret = -0.0001*std::pow(std::abs( \
         std::sin(x1)*std::sin(x2)*std::exp(\
-            std::abs(100. - std::sqrt(x1*x1 + x2*x2)/pi) \
+            std::abs(100. - std::hypot(x1, x2)/pi) \
         )) + 1., 0.1);
     return ret;
 }
@@ -94,7 +98,7 @@ holder_table(const std::vector<double>& xs)
     double x2 = xs.at(1);
 
     double ret = -1.*std::abs(\
-        std::sin(x1)*std::cos(x2)*std::exp(std::abs(1.-std::sqrt(x1*x1+x2*x2)/pi)));
+        std::sin(x1)*std::cos(x2)*std::exp(std::abs(1.-std::hypot(x1, x2)/pi)));
     return ret;
 }
 
@@ -113,12 +117,10 @@ levy(const std::vector<double>& xs)
         if (i == (len_xs-1))
             continue;
 
-        ret += (ws[i]-1.)*(ws[i]-1.) \
-                * (1. + 10.*std::sin(pi*ws[i]+1.)*std::sin(pi*ws[i]+1.));
+        ret += SQ(ws[i]-1.) * (1. + 10.*SQ(std::sin(pi*ws[i]+1.)));
     }
-    ret += std::sin(pi*ws.front())*std::sin(pi*ws.front()) \
-            + (ws.back()-1.)*(ws.back()-1.) \
-            * (1. + std::sin(2.*pi*ws.back())*std::sin(2.*pi*ws.back()));
+    ret += SQ(std::sin(pi*ws.front())) \
+            + SQ(ws.back()-1.) * (1. + SQ(std::sin(2.*pi*ws.back())));
     return ret;
 }
 
@@ -130,9 +132,9 @@ levy13(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    double ret = std::sin(3.*pi*x1) * std::sin(3.*pi*x1) \
-                 + (x1 - 1.) * (x1 - 1.) * (1. + std::sin(3.*pi*x2)*std::sin(3.*pi*x2)) \
-                 + (x2 - 1.) * (x2 - 1.) * (1. + std::sin(2.*pi*x2)*std::sin(2.*pi*x2));
+    double ret = SQ(std::sin(3.*pi*x1)) \
+                 + SQ(x1 - 1.) * (1. + SQ(std::sin(3.*pi*x2))) \
+                 + SQ(x2 - 1.) * (1. + SQ(std::sin(2.*pi*x2)));
     return ret;
 }
 
@@ -179,15 +181,6 @@ dejong5(const std::vector<double>& xs)
 }
 
 
-double
-parabola(const std::vector<double>& xs)
-{
-    double acc = 0.;
-    for (auto &&x: xs) {
-        acc += x*x;
-    }
-    return acc;
-}
 
 double
 michalewicz(const std::vector<double>& xs)
@@ -198,7 +191,7 @@ michalewicz(const std::vector<double>& xs)
     double acc = .0;
     for (std::size_t i=0; i < len_xs; ++i) {
         double y = xs[i];
-        acc += std::sin(y) * std::pow(std::sin(i * y * y / pi), M+M);
+        acc += std::sin(y) * std::pow(std::sin(i * SQ(y) / pi), M+M);
     }
     acc *= -1.;
     return acc;
@@ -215,7 +208,7 @@ non_cont_rastrigin(const std::vector<double>& xs)
     for (std::size_t i=0; i < len_xs; ++i) {
         y = xs[i];
         if (y >= .5) y = std::round(2. * y) / 2.;
-        acc += y * y - 10. * std::cos(2.*pi*y);
+        acc += SQ(y) - 10. * std::cos(2.*pi*y);
     }
     return acc;
 }
@@ -229,8 +222,7 @@ rastrigin(const std::vector<double>& xs)
     std::size_t len_xs = xs.size();
     acc = 10. * len_xs;
     for (std::size_t i=0; i < len_xs; ++i) {
-        acc += xs[i] * xs[i]\
-               - 10. * std::cos(2.*pi*xs[i]);
+        acc += SQ(xs[i]) - 10. * std::cos(2.*pi*xs[i]);
     }
     return acc;
 }
@@ -243,8 +235,8 @@ rosenbrock(const std::vector<double>& xs)
 
     std::size_t len_xs = xs.size();
     for (std::size_t i=0; i < len_xs -1; ++i) {
-        acc += 100. * (xs[i+1] - xs[i] * xs[i]) * (xs[i+1] - xs[i] * xs[i])\
-               + (xs[i] - 1.) * (xs[i] - 1.);
+        acc += 100. * SQ(xs[i+1] - SQ(xs[i])) \
+               + SQ(xs[i] - 1.);
     }
     return acc;
 }
@@ -291,10 +283,8 @@ drop_wave(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    double x12 = x1*x1;
-    double x22 = x2*x2;
-
-    double ret = -(1. + std::cos(12. + std::sqrt(x12 + x22))) / (.5 * (x12 + x22) + 2.);
+    double ret = -(1. + std::cos(12. + std::sqrt(SQ(x1) + SQ(x2)))) \
+                   / ((SQ(x1) + SQ(x2)) / 2. + 2.);
     return ret;
 }
 
@@ -304,8 +294,8 @@ easom(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    double x1mpi2 = (x1 - pi) * (x1 - pi);
-    double x2mpi2 = (x2 - pi) * (x2 - pi);
+    double x1mpi2 = SQ(x1 - pi);
+    double x2mpi2 = SQ(x2 - pi);
 
     double ret = -std::cos(x1) * std::cos(x2) * std::exp( - x1mpi2 - x2mpi2);
     return ret;
@@ -333,12 +323,12 @@ penalty1(const std::vector<double>& xs)
 
     y = 1. + (xs[0] + 1.) / 4.;
     yn = 1. + (xs[len_xs-1] + 1.) / 4.;
-    acc = 10. * std::sin(pi * y) * std::sin(pi * y) + (yn - 1.) * (yn - 1.);
+    acc = 10. * SQ(std::sin(pi * y)) + SQ(yn - 1.);
     for (std::size_t i=0; i < len_xs - 1; ++i) {
         y = 1. + (xs[i] + 1.) / 4.;
         yn = 1. + (xs[i+1] + 1.) / 4.;
         acc += (y - 1) * (y - 1) \
-               * (1. + 10. * std::sin(pi * yn) * std::sin(pi * yn));
+               * (1. + 10. * SQ(std::sin(pi * yn)));
     }
     acc *= pi / len_xs;
 
@@ -379,11 +369,11 @@ goldstein_price(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    acc1 = 1\
-           + (x1 + x2 + 1) * (x1 + x2 + 1)\
+    acc1 = 1 \
+           + SQ(x1 + x2 + 1) \
            * (19. - 14*x1 + 3*x1*x1 - 14*x2 + 6*x1*x2 + 3*x2*x2);
-    acc2 = 30.\
-           + (2*x1 - 3*x2) * (2*x1 - 3*x2)
+    acc2 = 30. \
+           + SQ(2*x1 - 3*x2) \
            * (18. - 32*x1 + 12*x1*x1 + 48*x2 - 36*x1*x2 + 27*x2*x2);
     ret = acc1 * acc2;
     return ret;
@@ -395,7 +385,7 @@ axis_parallel_hyperellipsoid(const std::vector<double>& xs)
     double ret = 0.;
     int index = 1;
     for (auto &&x: xs) {
-        ret += index * x * x;
+        ret += index * SQ(x);
         ++index;
     }
     return ret;
@@ -419,8 +409,8 @@ schaffers_f6(const std::vector<double>& xs)
     double x2 = xs.at(1);
 
     double ret = std::sin(std::hypot(x1, x2));
-    ret = ret * ret - 0.5;
-    ret /= std::pow((1. + .001 * (x1*x1 + x2*x2)), 2);
+    ret = SQ(ret) - 0.5;
+    ret /= SQ(1. + .001 * (SQ(x1) + SQ(x2)));
     ret += 0.5;
 
     return ret;
@@ -464,10 +454,21 @@ sphere(const std::vector<double>& xs)
 {
     double ret = 0.;
     for (auto &&x: xs) {
-        ret += x * x;
+        ret += SQ(x);
     }
     return ret;
 }
+double
+parabola(const std::vector<double>& xs)
+{
+    // TODO: remove or add an alias
+    double acc = 0.;
+    for (auto &&x: xs) {
+        acc += SQ(x);
+    }
+    return acc;
+}
+
 
 double
 tripod(const std::vector<double>& xs)
@@ -491,8 +492,8 @@ trefethen4(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    double ret = 0.25 * x1 * x1 \
-        + 0.25 * x2 * x2 \
+    double ret = 0.25 * SQ(x1) \
+        + 0.25 * SQ(x2) \
         + std::exp(std::sin(50. * x1)) \
         - std::sin(10. * x1 + 10. * x2) \
         + std::sin(60. * std::exp(x2)) \

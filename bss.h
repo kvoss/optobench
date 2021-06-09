@@ -18,7 +18,6 @@ double deceptive3(const std::vector<double>& xs);
 double drop_wave(const std::vector<double>& xs);
 double easom(const std::vector<double>& xs);
 double penalty1(const std::vector<double>& xs);
-double parabola(const std::vector<double>& xs);
 double michalewicz(const std::vector<double>& xs);
 double non_cont_rastrigin(const std::vector<double>& xs);
 double rastrigin(const std::vector<double>& xs);
@@ -31,6 +30,7 @@ double schaffers_f6(const std::vector<double>& xs);
 double schwefels_p222(const std::vector<double>& xs);
 double shubert(const std::vector<double>& xs);
 double sphere(const std::vector<double>& xs);
+double parabola(const std::vector<double>& xs);
 double tripod(const std::vector<double>& xs);
 double trefethen4(const std::vector<double>& xs);
 

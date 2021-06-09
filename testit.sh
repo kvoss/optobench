@@ -14,6 +14,7 @@ for el in dir(cb):
 
 ' > sanity-test-instance.log
 
+echo "=> Differences:"
 diff -u sanity-test-golden.log sanity-test-instance.log
 
 # echo "Timing test.."

@@ -116,9 +116,9 @@ levy(const std::vector<double>& xs)
         ret += (ws[i]-1.)*(ws[i]-1.) \
                 * (1. + 10.*std::sin(pi*ws[i]+1.)*std::sin(pi*ws[i]+1.));
     }
-    ret += std::sin(pi*ws[0])*std::sin(pi*ws[0]) + \
-            + (ws[len_xs-1]-1.)*(ws[len_xs-1]-1.) \
-            * (1. + std::sin(2.*pi*ws[len_xs-1])*std::sin(2.*pi*ws[len_xs-1]));
+    ret += std::sin(pi*ws.front())*std::sin(pi*ws.front()) \
+            + (ws.back()-1.)*(ws.back()-1.) \
+            * (1. + std::sin(2.*pi*ws.back())*std::sin(2.*pi*ws.back()));
     return ret;
 }
 
@@ -141,9 +141,9 @@ double
 six_hump_camel_back(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);
-    double x12 = x1*x1;
-
     double x2 = xs.at(1);
+
+    double x12 = x1*x1;
     double x22 = x2*x2;
 
     double ret = (4. - 2.1*x12 + (x12*x12)/3.)*x12 + x1*x2 + (-4. + 4.*x22)*x22;
@@ -193,13 +193,12 @@ double
 michalewicz(const std::vector<double>& xs)
 {
     const double M = 10.;
-    double acc = .0;
-    double y = 0;
-
     std::size_t len_xs = xs.size();
+
+    double acc = .0;
     for (std::size_t i=0; i < len_xs; ++i) {
-        y = xs[i];
-        acc += sin(y) * pow(sin(i * y * y / pi), M+M);
+        double y = xs[i];
+        acc += std::sin(y) * std::pow(std::sin(i * y * y / pi), M+M);
     }
     acc *= -1.;
     return acc;
@@ -215,8 +214,8 @@ non_cont_rastrigin(const std::vector<double>& xs)
     acc = 10. * len_xs;
     for (std::size_t i=0; i < len_xs; ++i) {
         y = xs[i];
-        if (y >= .5) y = round(2. * y) / 2.;
-        acc += y * y - 10. * cos(2.*pi*y);
+        if (y >= .5) y = std::round(2. * y) / 2.;
+        acc += y * y - 10. * std::cos(2.*pi*y);
     }
     return acc;
 }
@@ -231,7 +230,7 @@ rastrigin(const std::vector<double>& xs)
     acc = 10. * len_xs;
     for (std::size_t i=0; i < len_xs; ++i) {
         acc += xs[i] * xs[i]\
-               - 10. * cos(2.*pi*xs[i]);
+               - 10. * std::cos(2.*pi*xs[i]);
     }
     return acc;
 }
@@ -290,9 +289,9 @@ double
 drop_wave(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);
-    double x12 = x1*x1;
-
     double x2 = xs.at(1);
+
+    double x12 = x1*x1;
     double x22 = x2*x2;
 
     double ret = -(1. + std::cos(12. + std::sqrt(x12 + x22))) / (.5 * (x12 + x22) + 2.);
@@ -303,9 +302,9 @@ double
 easom(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);
-    double x1mpi2 = (x1 - pi) * (x1 - pi);
-
     double x2 = xs.at(1);
+
+    double x1mpi2 = (x1 - pi) * (x1 - pi);
     double x2mpi2 = (x2 - pi) * (x2 - pi);
 
     double ret = -std::cos(x1) * std::cos(x2) * std::exp( - x1mpi2 - x2mpi2);
@@ -323,9 +322,9 @@ penalty1(const std::vector<double>& xs)
         const double k = 100.;
         const double m = 4.;
         if (xi > a)
-            return k * pow(xi - a, m);
+            return k * std::pow(xi - a, m);
         else if (xi < (-1*a))
-            return k * pow(-1*xi - a, m);
+            return k * std::pow(-1*xi - a, m);
         else
             return 0.;
     };
@@ -334,12 +333,12 @@ penalty1(const std::vector<double>& xs)
 
     y = 1. + (xs[0] + 1.) / 4.;
     yn = 1. + (xs[len_xs-1] + 1.) / 4.;
-    acc = 10. * sin(pi * y) * sin(pi * y) + (yn - 1.) * (yn - 1.);
+    acc = 10. * std::sin(pi * y) * std::sin(pi * y) + (yn - 1.) * (yn - 1.);
     for (std::size_t i=0; i < len_xs - 1; ++i) {
         y = 1. + (xs[i] + 1.) / 4.;
         yn = 1. + (xs[i+1] + 1.) / 4.;
         acc += (y - 1) * (y - 1) \
-               * (1. + 10. * sin(pi * yn) * sin(pi * yn));
+               * (1. + 10. * std::sin(pi * yn) * std::sin(pi * yn));
     }
     acc *= pi / len_xs;
 
@@ -416,13 +415,12 @@ step(const std::vector<double>& xs)
 double
 schaffers_f6(const std::vector<double>& xs)
 {
-    double ret = 0.;
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    ret = sin(sqrt(x1 * x1 + x2 * x2));
+    double ret = std::sin(std::hypot(x1, x2));
     ret = ret * ret - 0.5;
-    ret /= pow((1. + .001 * (x1*x1 + x2*x2)), 2);
+    ret /= std::pow((1. + .001 * (x1*x1 + x2*x2)), 2);
     ret += 0.5;
 
     return ret;
@@ -434,12 +432,12 @@ schwefels_p222(const std::vector<double>& xs)
 {
     double ret = 0.;
     for (auto &&x: xs) {
-        ret += std::fabs(x);
+        ret += std::abs(x);
     }
 
     double prod = 1.;
     for (auto &&x: xs) {
-        prod *= std::fabs(x);
+        prod *= std::abs(x);
     }
     ret += prod;
     return ret;
@@ -449,16 +447,15 @@ schwefels_p222(const std::vector<double>& xs)
 double
 shubert(const std::vector<double>& xs)
 {
-    double ret = 0.;
-    double acc1 = 0, acc2 = 0;
-
     double x1 = xs.at(0);
     double x2 = xs.at(1);
-    for (unsigned short d=1; d <= 5; ++d) {
+
+    double acc1 = 0, acc2 = 0;
+    for (std::size_t d=1; d <= 5; ++d) {
         acc1 += (double)d * std::cos( (d + 1) * x1 + d);
         acc2 += (double)d * std::cos( (d + 1) * x2 + d);
     }
-    ret = acc1 + acc2;
+    double ret = acc1 + acc2;
     return ret;
 }
 
@@ -475,7 +472,6 @@ sphere(const std::vector<double>& xs)
 double
 tripod(const std::vector<double>& xs)
 {
-    double ret = 0.;
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
@@ -483,28 +479,25 @@ tripod(const std::vector<double>& xs)
     if (x1 < 0.) y1 = 0;
     if (x2 < 0.) y2 = 0;
 
-    ret = y2 * (1. + y1) \
+    double ret = y2 * (1. + y1) \
         + std::abs(x1 + 50. * y2 * (1. - 2.*y1)) \
         + std::abs(x2 + 50. * 1. * (1. - 2.*y2));
-
     return ret;
 }
 
 double
 trefethen4(const std::vector<double>& xs)
 {
-    double ret = 0.;
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    ret = 0.25 * x1 * x1 \
+    double ret = 0.25 * x1 * x1 \
         + 0.25 * x2 * x2 \
         + std::exp(std::sin(50. * x1)) \
         - std::sin(10. * x1 + 10. * x2) \
         + std::sin(60. * std::exp(x2)) \
         + std::sin(70. * std::sin(x1)) \
         + std::sin(80. * std::sin(x2));
-
     return ret;
 }
 

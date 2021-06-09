@@ -10,5 +10,5 @@ clean:
 	-rm *.so
 
 test:
-	sh ./testit.sh
+	@sh ./testit.sh
 

@@ -1,12 +1,12 @@
 # Benchmark Functions for Optimization
 
-Fast implementation of common benchmarks for testing numerical optimization methods.
+Fast benchmarks for testing numerical optimization methods with Python interface.
 
-This project attempts to provide a Python module for C++ implementation of
-benchmarks.
+This project provides a Python module with C++ implementations of benchmark functions for optimization.
 These functions often are the most time-consuming part of evaluating new
 optimization methods, so any improvements to this part help speed-up such
 research.
+
 
 ## Quick Start
 
@@ -16,6 +16,20 @@ import cbench as cb
 xs = [.1, .2, .3, .4, .5]
 print(cb.michalewicz(xs))
 ```
+
+### Requirements
+
+- Python 3.8
+- g++ / clang with support for C++17
+
+
+### Installation
+
+```sh
+# Load your python environment
+make install
+```
+
 
 ## List of functions
 

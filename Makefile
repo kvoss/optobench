@@ -1,7 +1,10 @@
-.PHONY: clean test all
+.PHONY: clean test all install
 
 all:
 	python setup.py build_ext --inplace
+
+install:
+	python setup.py install
 
 clean:
 	-rm *.so

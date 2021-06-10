@@ -43,6 +43,7 @@ x cross_in_tray
 x eggholder
 x gramacy_lee
 x holder_table
+x langermann
 x levy
 x levy13
 x six_hump_camel_back
@@ -50,19 +51,22 @@ x deceptive3
 x drop_wave
 x easom
 x penalty1
-T griewank
+x griewank
 x goldstein_price
-T axis_parallel_hyperellipsoid
+x axis_parallel_hyperellipsoid
 x michalewicz
 x noncontinuous_rastrigin
 x rastrigin
 x parabola
 x rosenbrock
+x schaffers_f2
+x schaffers_f4
 x schaffers_f6
-T schwefels_p222
+x schwefels
+x schwefels_p222
 x shubert
 x sphere
-T step
+x step
 x tripod
 x trefethen4
 ```

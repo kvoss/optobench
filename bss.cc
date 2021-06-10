@@ -102,6 +102,33 @@ holder_table(const std::vector<double>& xs)
     return ret;
 }
 
+double
+langermann(const std::vector<double>& xs)
+{
+    const std::size_t m = 5;
+    const double c[m] = {
+        1., 2., 5., 2., 3.
+    };
+    const double A[5][2] = {
+        {3, 5},
+        {5, 2},
+        {2, 1},
+        {1, 4},
+        {7, 9}
+    };
+
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = 0.;
+    for (std::size_t i=0; i<m; ++i) {
+        double lret = c[i];
+        lret *= std::exp(-1./pi * (SQ(x1 - A[i][0]) + SQ(x2 - A[i][1])));
+        lret *= std::cos(pi * (SQ(x1 - A[i][0]) + SQ(x2 - A[i][1])));
+        ret += lret;
+    }
+    return ret;
+}
 
 double
 levy(const std::vector<double>& xs)
@@ -435,6 +462,16 @@ schaffers_f6(const std::vector<double>& xs)
 }
 
 double
+schwefels(const std::vector<double>& xs)
+{
+    double ret = 418.9829 * xs.size();
+    for (auto &&x: xs) {
+        ret += x * std::sin(std::sqrt(std::abs(x)));
+    }
+    return ret;
+}
+
+double
 schwefels_p222(const std::vector<double>& xs)
 {
     double ret = 0.;
@@ -449,7 +486,6 @@ schwefels_p222(const std::vector<double>& xs)
     ret += prod;
     return ret;
 }
-
 
 double
 shubert(const std::vector<double>& xs)

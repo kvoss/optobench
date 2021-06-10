@@ -44,6 +44,7 @@ PYWRAP(cross_in_tray);
 PYWRAP(eggholder);
 PYWRAP(gramacy_lee);
 PYWRAP(holder_table);
+PYWRAP(langermann);
 PYWRAP(levy);
 PYWRAP(levy13);
 PYWRAP(six_hump_camel_back);
@@ -64,6 +65,7 @@ PYWRAP(step);
 PYWRAP(schaffers_f2);
 PYWRAP(schaffers_f4);
 PYWRAP(schaffers_f6);
+PYWRAP(schwefels);
 PYWRAP(schwefels_p222);
 PYWRAP(shubert);
 PYWRAP(sphere);
@@ -80,6 +82,7 @@ CBenchMethods[] = {
     {"eggholder", py_eggholder, METH_VARARGS, "eggholder function"},
     {"gramacy_lee", py_gramacy_lee, METH_VARARGS, "Gramacy Lee function"},
     {"holder_table", py_holder_table, METH_VARARGS, "holder table function"},
+    {"langermann", py_langermann, METH_VARARGS, "langermann function"},
     {"levy", py_levy, METH_VARARGS, "levy function"},
     {"levy13", py_levy13, METH_VARARGS, "levy13 function"},
     {"six_hump_camel_back", py_six_hump_camel_back, METH_VARARGS, "six_hump_camel_back function"},
@@ -100,6 +103,7 @@ CBenchMethods[] = {
     {"schaffers_f2", py_schaffers_f2, METH_VARARGS, "schaffers_f2 function"},
     {"schaffers_f4", py_schaffers_f4, METH_VARARGS, "schaffers_f4 function"},
     {"schaffers_f6", py_schaffers_f6, METH_VARARGS, "schaffers_f6 function"},
+    {"schwefels", py_schwefels, METH_VARARGS, "schwefels function"},
     {"schwefels_p222", py_schwefels_p222, METH_VARARGS, "schwefels_p222 function"},
     {"shubert", py_shubert, METH_VARARGS, "shubert function"},
     {"sphere", py_sphere, METH_VARARGS, "sphere function"},

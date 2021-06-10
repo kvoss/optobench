@@ -522,7 +522,6 @@ parabola(const std::vector<double>& xs)
     return acc;
 }
 
-
 double
 tripod(const std::vector<double>& xs)
 {

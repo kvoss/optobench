@@ -39,6 +39,9 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
 
 PYWRAP(ackley);
 PYWRAP(alpine);
+PYWRAP(bohachevsky1);
+PYWRAP(bohachevsky2);
+PYWRAP(bohachevsky3);
 PYWRAP(bukin_f6);
 PYWRAP(cross_in_tray);
 PYWRAP(eggholder);
@@ -77,6 +80,9 @@ static PyMethodDef
 CBenchMethods[] = {
     {"ackley", py_ackley, METH_VARARGS, "Ackley function"},
     {"alpine", py_alpine, METH_VARARGS, "Alpine function"},
+    {"bohachevsky1", py_bohachevsky1, METH_VARARGS, "bohachevsky1 function"},
+    {"bohachevsky2", py_bohachevsky2, METH_VARARGS, "bohachevsky2 function"},
+    {"bohachevsky3", py_bohachevsky3, METH_VARARGS, "bohachevsky3 function"},
     {"bukin_f6", py_bukin_f6, METH_VARARGS, "Bukin function 6"},
     {"cross_in_tray", py_cross_in_tray, METH_VARARGS, "cross_in_tray function"},
     {"eggholder", py_eggholder, METH_VARARGS, "eggholder function"},

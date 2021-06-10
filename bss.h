@@ -5,6 +5,9 @@
 
 double ackley(const std::vector<double>& xs);
 double alpine(const std::vector<double>& xs);
+double bohachevsky1(const std::vector<double>& xs);
+double bohachevsky2(const std::vector<double>& xs);
+double bohachevsky3(const std::vector<double>& xs);
 double bukin_f6(const std::vector<double>& xs);
 double cross_in_tray(const std::vector<double>& xs);
 double eggholder(const std::vector<double>& xs);

@@ -38,6 +38,9 @@ x dejong2 # this is the same as parabola
 x dejong5
 x ackley
 x alpine
+x bohachevsky1
+x bohachevsky2
+x bohachevsky3
 x bukin_f6
 x cross_in_tray
 x eggholder

@@ -37,6 +37,32 @@ alpine(const std::vector<double>& xs)
     return acc0;
 }
 
+double
+bohachevsky1(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(x1) + 2.*SQ(x2) - 0.3*std::cos(3.*pi*x1) - 0.4*std::cos(4.*pi*x2) + 0.7;
+    return ret;
+}
+
+double
+bohachevsky2(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(x1) + 2.*SQ(x2) - 0.3*std::cos(3.*pi*x1) * std::cos(4.*pi*x2) + 0.3;
+    return ret;
+}
+
+double
+bohachevsky3(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(x1) + 2.*SQ(x2) - 0.3*std::cos(3.*pi*x1 + 4.*pi*x2) + 0.3;
+    return ret;
+}
 
 double
 bukin_f6(const std::vector<double>& xs)

@@ -498,7 +498,7 @@ shubert(const std::vector<double>& xs)
         acc1 += (double)d * std::cos( (d + 1) * x1 + d);
         acc2 += (double)d * std::cos( (d + 1) * x2 + d);
     }
-    double ret = acc1 + acc2;
+    double ret = acc1 * acc2;
     return ret;
 }
 

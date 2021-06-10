@@ -26,6 +26,8 @@ double griewank(const std::vector<double>& xs);
 double goldstein_price(const std::vector<double>& xs);
 double axis_parallel_hyperellipsoid(const std::vector<double>& xs);
 double step(const std::vector<double>& xs);
+double schaffers_f2(const std::vector<double>& xs);
+double schaffers_f4(const std::vector<double>& xs);
 double schaffers_f6(const std::vector<double>& xs);
 double schwefels_p222(const std::vector<double>& xs);
 double shubert(const std::vector<double>& xs);

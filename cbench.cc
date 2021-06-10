@@ -61,6 +61,8 @@ PYWRAP(griewank);
 PYWRAP(goldstein_price);
 PYWRAP(axis_parallel_hyperellipsoid);
 PYWRAP(step);
+PYWRAP(schaffers_f2);
+PYWRAP(schaffers_f4);
 PYWRAP(schaffers_f6);
 PYWRAP(schwefels_p222);
 PYWRAP(shubert);
@@ -95,6 +97,8 @@ CBenchMethods[] = {
     {"goldstein_price", py_goldstein_price, METH_VARARGS, "griewank function"},
     {"axis_parallel_hyperellipsoid", py_axis_parallel_hyperellipsoid, METH_VARARGS, "axis_parallel_hyperellipsoid function"},
     {"step", py_step, METH_VARARGS, "step function"},
+    {"schaffers_f2", py_schaffers_f2, METH_VARARGS, "schaffers_f2 function"},
+    {"schaffers_f4", py_schaffers_f4, METH_VARARGS, "schaffers_f4 function"},
     {"schaffers_f6", py_schaffers_f6, METH_VARARGS, "schaffers_f6 function"},
     {"schwefels_p222", py_schwefels_p222, METH_VARARGS, "schwefels_p222 function"},
     {"shubert", py_shubert, METH_VARARGS, "shubert function"},

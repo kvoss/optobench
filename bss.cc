@@ -200,13 +200,9 @@ michalewicz(const std::vector<double>& xs)
 double
 non_cont_rastrigin(const std::vector<double>& xs)
 {
-    double acc = .0;
-    double y = 0;
-
-    std::size_t len_xs = xs.size();
-    acc = 10. * len_xs;
-    for (std::size_t i=0; i < len_xs; ++i) {
-        y = xs[i];
+    double acc = 10. * xs.size();
+    for (auto &&x : xs) {
+        double y = x;
         if (y >= .5) y = std::round(2. * y) / 2.;
         acc += SQ(y) - 10. * std::cos(2.*pi*y);
     }
@@ -217,12 +213,9 @@ non_cont_rastrigin(const std::vector<double>& xs)
 double
 rastrigin(const std::vector<double>& xs)
 {
-    double acc = .0;
-
-    std::size_t len_xs = xs.size();
-    acc = 10. * len_xs;
-    for (std::size_t i=0; i < len_xs; ++i) {
-        acc += SQ(xs[i]) - 10. * std::cos(2.*pi*xs[i]);
+    double acc = 10. * xs.size();
+    for (auto &&x : xs) {
+        acc += SQ(x) - 10. * std::cos(2.*pi*x);
     }
     return acc;
 }
@@ -294,10 +287,7 @@ easom(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    double x1mpi2 = SQ(x1 - pi);
-    double x2mpi2 = SQ(x2 - pi);
-
-    double ret = -std::cos(x1) * std::cos(x2) * std::exp( - x1mpi2 - x2mpi2);
+    double ret = -std::cos(x1) * std::cos(x2) * std::exp(- SQ(x1 - pi) - SQ(x2 - pi));
     return ret;
 }
 
@@ -332,8 +322,8 @@ penalty1(const std::vector<double>& xs)
     }
     acc *= pi / len_xs;
 
-    for (std::size_t i=0; i < len_xs; ++i) {
-        acc += u(xs[i]);
+    for (auto &&x: xs) {
+        acc += u(x);
     }
 
     return acc;
@@ -403,6 +393,34 @@ step(const std::vector<double>& xs)
 }
 
 double
+schaffers_f2(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = std::sin(SQ(x1) - SQ(x2));
+    ret = SQ(ret) - 0.5;
+    ret /= SQ(1. + .001 * (SQ(x1) + SQ(x2)));
+    ret += 0.5;
+
+    return ret;
+}
+
+double
+schaffers_f4(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = std::cos(std::sin(std::abs(SQ(x1) - SQ(x2))));
+    ret = SQ(ret) - 0.5;
+    ret /= SQ(1. + .001 * (SQ(x1) + SQ(x2)));
+    ret += 0.5;
+
+    return ret;
+}
+
+double
 schaffers_f6(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);
@@ -415,7 +433,6 @@ schaffers_f6(const std::vector<double>& xs)
 
     return ret;
 }
-
 
 double
 schwefels_p222(const std::vector<double>& xs)

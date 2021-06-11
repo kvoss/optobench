@@ -112,7 +112,7 @@ CBenchMethods[] = {
     {"tripod", py_tripod, METH_VARARGS, "tripod function"},
     {"trefethen4", py_trefethen4, METH_VARARGS, "trefethen4 function"},
     {"three_hump_camel_back", py_three_hump_camel_back, METH_VARARGS, "three hump camel function"},
-    {"dixon_price", py_dixonPrice, METH_VARARGS, "dixon price function"},
+    {"dixon_price", py_dixon_price, METH_VARARGS, "dixon price function"},
     {NULL, NULL, 0, NULL}
 };
 

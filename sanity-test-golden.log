@@ -25,6 +25,7 @@
 -> perm0db: 458.075937106786
 -> rastrigin: 60.54036728428271
 -> rosenbrock: 34.53
+-> rotated_hyperellipsoid: 1.0601
 -> schaffers_f2: 0.0009496363163922772
 -> schaffers_f4: 0.9990506334623043
 -> schaffers_f6: 0.049217281823751846
@@ -34,5 +35,8 @@
 -> six_hump_camel_back: -0.09380966666666667
 -> sphere: 0.5601
 -> step: 1.25
+-> sum_powers: 0.053936287801
+-> sum_squares: 2.3005
 -> trefethen4: -0.13771083406418394
+-> trid: 2.1361
 -> tripod: 101.69999999999999

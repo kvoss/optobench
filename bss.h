@@ -30,6 +30,9 @@ double rosenbrock(const std::vector<double>& xs);
 double griewank(const std::vector<double>& xs);
 double goldstein_price(const std::vector<double>& xs);
 double axis_parallel_hyperellipsoid(const std::vector<double>& xs);
+double rotated_hyperellipsoid(const std::vector<double>& xs);
+double sum_powers(const std::vector<double>& xs);
+double trid(const std::vector<double>& xs);
 double step(const std::vector<double>& xs);
 double schaffers_f2(const std::vector<double>& xs);
 double schaffers_f4(const std::vector<double>& xs);
@@ -38,7 +41,6 @@ double schwefels(const std::vector<double>& xs);
 double schwefels_p222(const std::vector<double>& xs);
 double shubert(const std::vector<double>& xs);
 double sphere(const std::vector<double>& xs);
-double parabola(const std::vector<double>& xs);
 double tripod(const std::vector<double>& xs);
 double trefethen4(const std::vector<double>& xs);
 

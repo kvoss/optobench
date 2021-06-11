@@ -441,11 +441,41 @@ goldstein_price(const std::vector<double>& xs)
 double
 axis_parallel_hyperellipsoid(const std::vector<double>& xs)
 {
+    // same as sum_squares
     double ret = 0.;
-    int index = 1;
-    for (auto &&x: xs) {
-        ret += index * SQ(x);
-        ++index;
+    for (std::size_t i=0; i<xs.size(); ++i)
+        ret += (i+1.) * SQ(xs[i]);
+    return ret;
+}
+
+double
+rotated_hyperellipsoid(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    for (std::size_t i=0; i<xs.size(); ++i)
+        for (std::size_t j=0; j<=i; ++j)
+            ret += SQ(xs[j]);
+    return ret;
+}
+
+double
+sum_powers(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    for (std::size_t i=0; i<xs.size(); ++i)
+        ret += std::pow(std::abs(xs[i]), i+2.);
+    return ret;
+}
+
+double
+trid(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    for (std::size_t i=0; i<xs.size(); ++i) {
+        ret += SQ(xs[i] - 1.);
+        if (i < 1)
+            continue;
+        ret -= xs[i] * xs[i-1];
     }
     return ret;
 }
@@ -548,20 +578,9 @@ double
 sphere(const std::vector<double>& xs)
 {
     double ret = 0.;
-    for (auto &&x: xs) {
+    for (auto &&x: xs)
         ret += SQ(x);
-    }
     return ret;
-}
-double
-parabola(const std::vector<double>& xs)
-{
-    // TODO: remove or add an alias
-    double acc = 0.;
-    for (auto &&x: xs) {
-        acc += SQ(x);
-    }
-    return acc;
 }
 
 double

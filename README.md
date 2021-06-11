@@ -34,8 +34,6 @@ make install
 ## List of functions
 
 ```
-x dejong2 # this is the same as parabola
-x dejong5
 x ackley
 x alpine
 x bohachevsky1
@@ -43,6 +41,7 @@ x bohachevsky2
 x bohachevsky3
 x bukin_f6
 x cross_in_tray
+x dejong5
 x eggholder
 x gramacy_lee
 x holder_table
@@ -57,11 +56,15 @@ x penalty1
 x griewank
 x goldstein_price
 x axis_parallel_hyperellipsoid
+x rotated_hyperellipsoid
+x sum_powers
+x sum_squares # alias for axis_parallel_hyperellipsoid
+x trid
 x michalewicz
 x perm0db
 x noncontinuous_rastrigin
 x rastrigin
-x parabola
+x parabola # alias for sphere
 x rosenbrock
 x schaffers_f2
 x schaffers_f4
@@ -75,9 +78,14 @@ x tripod
 x trefethen4
 ```
 
-## TODO:
-- [X] check for empty lists in the benchmark functions
-- [ ] add unit tests
+## Contributions
+
+After forking the repo and cloning it locally, use `make && make test`.
+
+`make test` runs the `testit.sh` script, which evaluates functions and dumps the result to `sanity-test-instance.log` file.
+Next, that result is compared against golden results in `sanity-test-golden.log`.
+
+When your changes are ready and golden data updated, submit a pull request.
 
 
 ## References

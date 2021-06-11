@@ -58,6 +58,7 @@ PYWRAP(easom);
 PYWRAP(penalty1);
 PYWRAP(parabola);
 PYWRAP(michalewicz);
+PYWRAP(perm0db);
 PYWRAP(non_cont_rastrigin);
 PYWRAP(rastrigin);
 PYWRAP(rosenbrock);
@@ -99,6 +100,7 @@ CBenchMethods[] = {
     {"penalty1", py_penalty1, METH_VARARGS, "penalty1 function"},
     {"parabola", py_parabola, METH_VARARGS, "parabola function"},
     {"michalewicz", py_michalewicz, METH_VARARGS, "michalewicz function"},
+    {"perm0db", py_perm0db, METH_VARARGS, "perm0db function"},
     {"non_cont_rastrigin", py_non_cont_rastrigin, METH_VARARGS, "non-continuous rastrigin function"},
     {"rastrigin", py_rastrigin, METH_VARARGS, "rastrigin function"},
     {"rosenbrock", py_rosenbrock, METH_VARARGS, "rosenbrock function"},

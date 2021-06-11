@@ -233,8 +233,6 @@ dejong5(const std::vector<double>& xs)
     return acc;
 }
 
-
-
 double
 michalewicz(const std::vector<double>& xs)
 {
@@ -248,6 +246,24 @@ michalewicz(const std::vector<double>& xs)
     }
     acc *= -1.;
     return acc;
+}
+
+double
+perm0db(const std::vector<double>& xs)
+{
+    const double B = 10.;
+    std::size_t len_xs = xs.size();
+
+    double ret = .0;
+    for (std::size_t i=0; i < len_xs; ++i) {
+        double lret = .0;
+        for (std::size_t j=0; j < len_xs; ++j) {
+            lret += (j+1.+B) * (std::pow(xs[j], i+1.) - 1./std::pow(j+1., i+1.));
+        }
+        lret *= lret;
+        ret += lret;
+    }
+    return ret;
 }
 
 double

@@ -58,6 +58,7 @@ x griewank
 x goldstein_price
 x axis_parallel_hyperellipsoid
 x michalewicz
+x perm0db
 x noncontinuous_rastrigin
 x rastrigin
 x parabola

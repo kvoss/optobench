@@ -615,6 +615,34 @@ trefethen4(const std::vector<double>& xs)
     return ret;
 }
 
+//Valley Functions
+double
+three_hump_camel_back(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+
+    double ret = (2 * SQ(x1)) 
+        - (1.05  * std::pow(x1, 4))
+        + (std::pow(x1, 6) / 6)
+        + (x1 * x2)
+        + SQ(x2);
+    return ret;
+}
+
+double 
+dixon_price(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double acc0 = 0;
+    for(std::size_t d=2; d <= xs.size(); ++d) {
+        acc0 += d*SQ((2 * SQ(xs.at(d-1))-xs.at(d-2)));
+    }
+
+    double ret = SQ(x1-1) + acc0;
+    return ret;
+}
+
 // int
 // main (int argc, char** argv)
 // {

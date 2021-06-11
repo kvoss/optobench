@@ -15,9 +15,13 @@
 -> drop_wave: -0.958928083376883
 -> easom: -1.6344141224711163e-08
 -> eggholder: -26.34161710307163
+-> forrester: -0.6565767743055739
 -> goldstein_price: 899.4140086400001
 -> gramacy_lee: 0.6561
 -> griewank: 0.07377871010504211
+-> hartmann_3d: -0.7329114876560024
+-> hartmann_4d: -1.8805100051796992
+-> hartmann_6d: -1.352784307845224
 -> holder_table: -0.24769346068827464
 -> langermann: 0.902701275155354
 -> levy: 0.7980912375904945
@@ -27,6 +31,7 @@
 -> parabola: 0.5601
 -> penalty1: 5.880180416027215
 -> perm0db: 458.075937106786
+-> powell: 4.5666
 -> rastrigin: 60.54036728428271
 -> rosenbrock: 34.53
 -> rotated_hyperellipsoid: 1.0601
@@ -35,6 +40,7 @@
 -> schaffers_f6: 0.049217281823751846
 -> schwefels: 2095.758798134426
 -> schwefels_p222: 1.511224
+-> shekel: -0.49197124278910376
 -> shubert: -1.839613667262635
 -> six_hump_camel_back: -0.09380966666666667
 -> sphere: 0.5601

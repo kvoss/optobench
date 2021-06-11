@@ -49,6 +49,12 @@ double beale(const std::vector<double>& xs);
 double branin(const std::vector<double>& xs);
 double colville(const std::vector<double>& xs);
 double styblinski_tang(const std::vector<double>& xs);
+double powell(const std::vector<double>& xs);
+double shekel(const std::vector<double>& xs);
+double forrester(const std::vector<double>& xs);
+double hartmann_3d(const std::vector<double>& xs);
+double hartmann_4d(const std::vector<double>& xs);
+double hartmann_6d(const std::vector<double>& xs);
 
 #endif // _BSS_H
 

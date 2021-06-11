@@ -428,12 +428,12 @@ goldstein_price(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    acc1 = 1 \
-           + SQ(x1 + x2 + 1) \
-           * (19. - 14*x1 + 3*x1*x1 - 14*x2 + 6*x1*x2 + 3*x2*x2);
-    acc2 = 30. \
-           + SQ(2*x1 - 3*x2) \
-           * (18. - 32*x1 + 12*x1*x1 + 48*x2 - 36*x1*x2 + 27*x2*x2);
+    acc1 = 1.
+        + SQ(x1 + x2 + 1)
+        * (19. - 14*x1 + 3*x1*x1 - 14*x2 + 6*x1*x2 + 3*x2*x2);
+    acc2 = 30.
+        + SQ(2*x1 - 3*x2)
+        * (18. - 32*x1 + 12*x1*x1 + 48*x2 - 36*x1*x2 + 27*x2*x2);
     ret = acc1 * acc2;
     return ret;
 }
@@ -696,6 +696,143 @@ styblinski_tang(const std::vector<double>& xs)
         ret += SQ(x) * SQ(x) - 16.*SQ(x) + 5.*x;
     }
     ret /= 2.;
+    return ret;
+}
+
+double
+powell(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    std::size_t max_d = std::floor(xs.size() / 4);
+    for (std::size_t i=1; i<=max_d; ++i) {
+        double xm0 = xs.at(4 * i - 1);
+        double xm1 = xs.at(4 * i - 2);
+        double xm2 = xs.at(4 * i - 3);
+        double xm3 = xs.at(4 * i - 4);
+        ret += SQ(xm3 + 10.*xm2)
+            + 5. * SQ(xm1 - xm0)
+            + SQ(SQ(xm2 - 2.*xm1))
+            + 10. * SQ(SQ(xm3 - xm0));
+    }
+    return ret;
+}
+
+double
+shekel(const std::vector<double>& xs)
+{
+    // 4-d function
+    const std::size_t m = 10;
+    const double b[m] = {.1, .2, .2, .4, .4, .6, .3, .7, .5, .5};
+    const double c[4][m] = {
+        {4., 1., 8., 6., 3., 2., 5., 8., 6., 7.},
+        {4., 1., 8., 6., 7., 9., 3., 1., 2., 3.6},
+        {4., 1., 8., 6., 3., 2., 5., 8., 6., 7.},
+        {4., 1., 8., 6., 7., 9., 3., 1., 2., 3.6}
+    };
+
+    double ret = 0.;
+    for (std::size_t i=0; i<m; ++i) {
+        double lret = b[i];
+        for (std::size_t j=0; j<4; ++j)
+            lret += SQ(xs.at(j) - c[j][i]);
+        ret += 1. / lret;
+    }
+    ret *= -1.;
+    return ret;
+}
+
+double
+forrester(const std::vector<double>& xs)
+{
+    // 1-d function
+    double x1 = xs.at(0);
+    double ret = SQ(6.*x1 - 2.) * std::sin(12.*x1 - 4.);
+    return ret;
+}
+
+double
+hartmann_3d(const std::vector<double>& xs)
+{
+    const double al[] = {1., 1.2, 3., 3.2};
+    const double a[4][3] = {
+        {3., 10., 30.},
+        {.1, 10., 35.},
+        {3., 10., 30.},
+        {.1, 10., 35.}
+    };
+    const double p[4][3] = {
+        {.3689, .1170, .2673},
+        {.4699, .4387, .7470},
+        {.1091, .8732, .5547},
+        {.0381, .5743, .8828}
+    };
+
+    double ret = 0.;
+    for (std::size_t i=0; i<4; ++i) {
+        double lret = 0.;
+        for (std::size_t j=0; j<3; ++j)
+            lret += SQ(xs.at(j) - p[i][j]) * a[i][j];
+        ret += al[i] * std::exp(-1. * lret);
+    }
+    ret *= -1.;
+    return ret;
+}
+
+double
+hartmann_4d(const std::vector<double>& xs)
+{
+    const double al[] = {1., 1.2, 3., 3.2};
+    const double a[4][4] = {
+        {10.,  3., 17., 3.5},
+        {.05, 10., 17.,  .1},
+        { 3., 3.5, 1.7, 10.},
+        {17.,  8., .05, 10.}
+    };
+    const double p[4][4] = {
+        {.1312, .1696, .5569, .0124},
+        {.2329, .4135, .8307, .3736},
+        {.2348, .1451, .3522, .2883},
+        {.4047, .8828, .8732, .5743}
+    };
+
+    double ret = 0.;
+    for (std::size_t i=0; i<4; ++i) {
+        double lret = 0.;
+        for (std::size_t j=0; j<4; ++j)
+            lret += SQ(xs.at(j) - p[i][j]) * a[i][j];
+        ret += al[i] * std::exp(-1. * lret);
+    }
+    ret *= -1.;
+    ret += 1.1;
+    ret /= .839;
+    return ret;
+}
+
+double
+hartmann_6d(const std::vector<double>& xs)
+{
+    const double al[] = {1., 1.2, 3., 3.2};
+    const double a[4][6] = {
+        {10.,  3., 17., 3.5, 1.7, 8.},
+        {.05, 10., 17.,  .1,  8., 14.},
+        { 3., 3.5, 1.7, 10., 17., 8.},
+        {17.,  8., .05, 10.,  .1, 14.}
+    };
+    const double p[4][6] = {
+        {.1312, .1696, .5569, .0124, .8283, .5886},
+        {.2329, .4135, .8307, .3736, .1004, .9991},
+        {.2348, .1451, .3522, .2883, .3047, .6650},
+        {.4047, .8828, .8732, .5743, .1091, .0381}
+    };
+
+    double ret = 0.;
+    for (std::size_t i=0; i<4; ++i) {
+        double lret = 0.;
+        for (std::size_t j=0; j<6; ++j)
+            lret += SQ(xs.at(j) - p[i][j]) * a[i][j];
+        ret += al[i] * std::exp(-1. * lret);
+    }
+    ret *= -1.;
     return ret;
 }
 

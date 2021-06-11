@@ -82,6 +82,12 @@ x beale
 x branin
 x colville
 x styblinski_tang
+x powell
+x shekel
+x forrester
+x hartmann_3d
+x hartmann_4d
+x hartmann_6d
 ```
 
 ## Contributions

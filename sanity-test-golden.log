@@ -1,6 +1,9 @@
 -> ackley: 3.194178743769641
 -> alpine: 0.6941110026558399
 -> axis_parallel_hyperellipsoid: 2.3005
+-> bohachevsky1: 0.937271222062237
+-> bohachevsky2: 0.5326584774442731
+-> bohachevsky3: 0.675316954888546
 -> bukin_f6: 44.811177812216314
 -> cross_in_tray: -1.4777274811045142
 -> deceptive3: -0.0009897909414337454
@@ -20,8 +23,10 @@
 -> non_cont_rastrigin: 60.55
 -> parabola: 0.5601
 -> penalty1: 5.880180416027215
+-> perm0db: 458.075937106786
 -> rastrigin: 60.54036728428271
 -> rosenbrock: 34.53
+-> rotated_hyperellipsoid: 1.0601
 -> schaffers_f2: 0.0009496363163922772
 -> schaffers_f4: 0.9990506334623043
 -> schaffers_f6: 0.049217281823751846
@@ -31,11 +36,9 @@
 -> six_hump_camel_back: -0.09380966666666667
 -> sphere: 0.5601
 -> step: 1.25
+-> sum_powers: 0.053936287801
+-> sum_squares: 2.3005
 -> three_hump_camel_back: 0.07989516666666668
 -> trefethen4: -0.13771083406418394
+-> trid: 2.1361
 -> tripod: 101.69999999999999
-
-
-
-
-

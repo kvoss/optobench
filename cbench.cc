@@ -39,6 +39,9 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
 
 PYWRAP(ackley);
 PYWRAP(alpine);
+PYWRAP(bohachevsky1);
+PYWRAP(bohachevsky2);
+PYWRAP(bohachevsky3);
 PYWRAP(bukin_f6);
 PYWRAP(cross_in_tray);
 PYWRAP(eggholder);
@@ -53,14 +56,17 @@ PYWRAP(deceptive3);
 PYWRAP(drop_wave);
 PYWRAP(easom);
 PYWRAP(penalty1);
-PYWRAP(parabola);
 PYWRAP(michalewicz);
+PYWRAP(perm0db);
 PYWRAP(non_cont_rastrigin);
 PYWRAP(rastrigin);
 PYWRAP(rosenbrock);
 PYWRAP(griewank);
 PYWRAP(goldstein_price);
 PYWRAP(axis_parallel_hyperellipsoid);
+PYWRAP(rotated_hyperellipsoid);
+PYWRAP(sum_powers);
+PYWRAP(trid);
 PYWRAP(step);
 PYWRAP(schaffers_f2);
 PYWRAP(schaffers_f4);
@@ -79,6 +85,9 @@ static PyMethodDef
 CBenchMethods[] = {
     {"ackley", py_ackley, METH_VARARGS, "Ackley function"},
     {"alpine", py_alpine, METH_VARARGS, "Alpine function"},
+    {"bohachevsky1", py_bohachevsky1, METH_VARARGS, "bohachevsky1 function"},
+    {"bohachevsky2", py_bohachevsky2, METH_VARARGS, "bohachevsky2 function"},
+    {"bohachevsky3", py_bohachevsky3, METH_VARARGS, "bohachevsky3 function"},
     {"bukin_f6", py_bukin_f6, METH_VARARGS, "Bukin function 6"},
     {"cross_in_tray", py_cross_in_tray, METH_VARARGS, "cross_in_tray function"},
     {"eggholder", py_eggholder, METH_VARARGS, "eggholder function"},
@@ -88,19 +97,25 @@ CBenchMethods[] = {
     {"levy", py_levy, METH_VARARGS, "levy function"},
     {"levy13", py_levy13, METH_VARARGS, "levy13 function"},
     {"six_hump_camel_back", py_six_hump_camel_back, METH_VARARGS, "six_hump_camel_back function"},
+    // {"dejong2", py_sphere, METH_VARARGS, "dejong5 (sphere) function"},
     {"dejong5", py_dejong5, METH_VARARGS, "dejong5 function"},
     {"deceptive3", py_deceptive3, METH_VARARGS, "deceptive3 function"},
     {"drop_wave", py_drop_wave, METH_VARARGS, "drop_wave function"},
     {"easom", py_easom, METH_VARARGS, "easom function"},
     {"penalty1", py_penalty1, METH_VARARGS, "penalty1 function"},
-    {"parabola", py_parabola, METH_VARARGS, "parabola function"},
+    {"parabola", py_sphere, METH_VARARGS, "parabola (sphere) function"},
     {"michalewicz", py_michalewicz, METH_VARARGS, "michalewicz function"},
+    {"perm0db", py_perm0db, METH_VARARGS, "perm0db function"},
     {"non_cont_rastrigin", py_non_cont_rastrigin, METH_VARARGS, "non-continuous rastrigin function"},
     {"rastrigin", py_rastrigin, METH_VARARGS, "rastrigin function"},
     {"rosenbrock", py_rosenbrock, METH_VARARGS, "rosenbrock function"},
     {"griewank", py_griewank, METH_VARARGS, "griewank function"},
     {"goldstein_price", py_goldstein_price, METH_VARARGS, "griewank function"},
     {"axis_parallel_hyperellipsoid", py_axis_parallel_hyperellipsoid, METH_VARARGS, "axis_parallel_hyperellipsoid function"},
+    {"sum_squares", py_axis_parallel_hyperellipsoid, METH_VARARGS, "sum_squares (axis_parallel_hyperellipsoid) function"},
+    {"rotated_hyperellipsoid", py_rotated_hyperellipsoid, METH_VARARGS, "rotated_hyperellipsoid function"},
+    {"sum_powers", py_sum_powers, METH_VARARGS, "sum_powers function"},
+    {"trid", py_trid, METH_VARARGS, "trid function"},
     {"step", py_step, METH_VARARGS, "step function"},
     {"schaffers_f2", py_schaffers_f2, METH_VARARGS, "schaffers_f2 function"},
     {"schaffers_f4", py_schaffers_f4, METH_VARARGS, "schaffers_f4 function"},

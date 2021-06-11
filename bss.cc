@@ -37,6 +37,32 @@ alpine(const std::vector<double>& xs)
     return acc0;
 }
 
+double
+bohachevsky1(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(x1) + 2.*SQ(x2) - 0.3*std::cos(3.*pi*x1) - 0.4*std::cos(4.*pi*x2) + 0.7;
+    return ret;
+}
+
+double
+bohachevsky2(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(x1) + 2.*SQ(x2) - 0.3*std::cos(3.*pi*x1) * std::cos(4.*pi*x2) + 0.3;
+    return ret;
+}
+
+double
+bohachevsky3(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(x1) + 2.*SQ(x2) - 0.3*std::cos(3.*pi*x1 + 4.*pi*x2) + 0.3;
+    return ret;
+}
 
 double
 bukin_f6(const std::vector<double>& xs)
@@ -207,8 +233,6 @@ dejong5(const std::vector<double>& xs)
     return acc;
 }
 
-
-
 double
 michalewicz(const std::vector<double>& xs)
 {
@@ -222,6 +246,24 @@ michalewicz(const std::vector<double>& xs)
     }
     acc *= -1.;
     return acc;
+}
+
+double
+perm0db(const std::vector<double>& xs)
+{
+    const double B = 10.;
+    std::size_t len_xs = xs.size();
+
+    double ret = .0;
+    for (std::size_t i=0; i < len_xs; ++i) {
+        double lret = .0;
+        for (std::size_t j=0; j < len_xs; ++j) {
+            lret += (j+1.+B) * (std::pow(xs[j], i+1.) - 1./std::pow(j+1., i+1.));
+        }
+        lret *= lret;
+        ret += lret;
+    }
+    return ret;
 }
 
 double
@@ -399,11 +441,41 @@ goldstein_price(const std::vector<double>& xs)
 double
 axis_parallel_hyperellipsoid(const std::vector<double>& xs)
 {
+    // same as sum_squares
     double ret = 0.;
-    int index = 1;
-    for (auto &&x: xs) {
-        ret += index * SQ(x);
-        ++index;
+    for (std::size_t i=0; i<xs.size(); ++i)
+        ret += (i+1.) * SQ(xs[i]);
+    return ret;
+}
+
+double
+rotated_hyperellipsoid(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    for (std::size_t i=0; i<xs.size(); ++i)
+        for (std::size_t j=0; j<=i; ++j)
+            ret += SQ(xs[j]);
+    return ret;
+}
+
+double
+sum_powers(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    for (std::size_t i=0; i<xs.size(); ++i)
+        ret += std::pow(std::abs(xs[i]), i+2.);
+    return ret;
+}
+
+double
+trid(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    for (std::size_t i=0; i<xs.size(); ++i) {
+        ret += SQ(xs[i] - 1.);
+        if (i < 1)
+            continue;
+        ret -= xs[i] * xs[i-1];
     }
     return ret;
 }
@@ -506,22 +578,10 @@ double
 sphere(const std::vector<double>& xs)
 {
     double ret = 0.;
-    for (auto &&x: xs) {
+    for (auto &&x: xs)
         ret += SQ(x);
-    }
     return ret;
 }
-double
-parabola(const std::vector<double>& xs)
-{
-    // TODO: remove or add an alias
-    double acc = 0.;
-    for (auto &&x: xs) {
-        acc += SQ(x);
-    }
-    return acc;
-}
-
 
 double
 tripod(const std::vector<double>& xs)

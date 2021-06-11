@@ -571,7 +571,7 @@ three_hump_camel_back(const std::vector<double>& xs)
 }
 
 double 
-dixonPrice(const std::vector<double>& xs)
+dixon_price(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);
     double acc0 = 0;

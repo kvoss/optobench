@@ -69,6 +69,8 @@ x sphere
 x step
 x tripod
 x trefethen4
+x three_hump_camel_back
+x dixon_price
 ```
 
 ## TODO:

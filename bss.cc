@@ -579,8 +579,7 @@ dixonPrice(const std::vector<double>& xs)
         acc0 += d*SQ((2 * SQ(xs.at(d-1))-xs.at(d-2)));
     }
 
-    double ret = SQ(x1-1) 
-    + acc0;
+    double ret = SQ(x1-1) + acc0;
     return ret;
 }
 

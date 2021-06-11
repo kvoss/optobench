@@ -9,7 +9,10 @@ for el in dir(cb):
         continue
     print(f"-> {el}: ", end="", flush=True)
     fn = getattr(cb, el)
-    ans = fn(xs)
+    if el == "hartmann_6d":
+        ans = fn([0.1, 0.2, 0.3, 0.4, 0.51, 0.63])
+    else:
+        ans = fn(xs)
     print(ans)
 
 ' > sanity-test-instance.log

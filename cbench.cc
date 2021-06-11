@@ -58,6 +58,7 @@ PYWRAP(easom);
 PYWRAP(penalty1);
 PYWRAP(michalewicz);
 PYWRAP(perm0db);
+PYWRAP(permdb);
 PYWRAP(non_cont_rastrigin);
 PYWRAP(rastrigin);
 PYWRAP(rosenbrock);
@@ -79,7 +80,16 @@ PYWRAP(tripod);
 PYWRAP(trefethen4);
 PYWRAP(three_hump_camel_back);
 PYWRAP(dixon_price);
-
+PYWRAP(beale);
+PYWRAP(branin);
+PYWRAP(colville);
+PYWRAP(styblinski_tang);
+PYWRAP(powell);
+PYWRAP(shekel);
+PYWRAP(forrester);
+PYWRAP(hartmann_3d);
+PYWRAP(hartmann_4d);
+PYWRAP(hartmann_6d);
 
 static PyMethodDef
 CBenchMethods[] = {
@@ -106,6 +116,7 @@ CBenchMethods[] = {
     {"parabola", py_sphere, METH_VARARGS, "parabola (sphere) function"},
     {"michalewicz", py_michalewicz, METH_VARARGS, "michalewicz function"},
     {"perm0db", py_perm0db, METH_VARARGS, "perm0db function"},
+    {"permdb", py_permdb, METH_VARARGS, "perm d beta function"},
     {"non_cont_rastrigin", py_non_cont_rastrigin, METH_VARARGS, "non-continuous rastrigin function"},
     {"rastrigin", py_rastrigin, METH_VARARGS, "rastrigin function"},
     {"rosenbrock", py_rosenbrock, METH_VARARGS, "rosenbrock function"},
@@ -128,6 +139,16 @@ CBenchMethods[] = {
     {"trefethen4", py_trefethen4, METH_VARARGS, "trefethen4 function"},
     {"three_hump_camel_back", py_three_hump_camel_back, METH_VARARGS, "three hump camel function"},
     {"dixon_price", py_dixon_price, METH_VARARGS, "dixon price function"},
+    {"beale", py_beale, METH_VARARGS, "Beale function"},
+    {"branin", py_branin, METH_VARARGS, "Branin function"},
+    {"colville", py_colville, METH_VARARGS, "Colville function"},
+    {"styblinski_tang", py_styblinski_tang, METH_VARARGS, "Styblinski_tang function"},
+    {"powell", py_powell, METH_VARARGS, "Powell function"},
+    {"shekel", py_shekel, METH_VARARGS, "Shekel function"},
+    {"forrester", py_forrester, METH_VARARGS, "Forrester function"},
+    {"hartmann_3d", py_hartmann_3d, METH_VARARGS, "Hartmann_3d function"},
+    {"hartmann_4d", py_hartmann_4d, METH_VARARGS, "Hartmann_4d function"},
+    {"hartmann_6d", py_hartmann_6d, METH_VARARGS, "Hartmann_6d function"},
     {NULL, NULL, 0, NULL}
 };
 

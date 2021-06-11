@@ -24,6 +24,7 @@ double easom(const std::vector<double>& xs);
 double penalty1(const std::vector<double>& xs);
 double michalewicz(const std::vector<double>& xs);
 double perm0db(const std::vector<double>& xs);
+double permdb(const std::vector<double>& xs);
 double non_cont_rastrigin(const std::vector<double>& xs);
 double rastrigin(const std::vector<double>& xs);
 double rosenbrock(const std::vector<double>& xs);
@@ -45,6 +46,16 @@ double tripod(const std::vector<double>& xs);
 double trefethen4(const std::vector<double>& xs);
 double three_hump_camel_back(const std::vector<double>& xs);
 double dixon_price(const std::vector<double>& xs);
+double beale(const std::vector<double>& xs);
+double branin(const std::vector<double>& xs);
+double colville(const std::vector<double>& xs);
+double styblinski_tang(const std::vector<double>& xs);
+double powell(const std::vector<double>& xs);
+double shekel(const std::vector<double>& xs);
+double forrester(const std::vector<double>& xs);
+double hartmann_3d(const std::vector<double>& xs);
+double hartmann_4d(const std::vector<double>& xs);
+double hartmann_6d(const std::vector<double>& xs);
 
 #endif // _BSS_H
 

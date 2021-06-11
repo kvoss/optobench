@@ -62,6 +62,7 @@ x sum_squares # alias for axis_parallel_hyperellipsoid
 x trid
 x michalewicz
 x perm0db
+x permdb
 x noncontinuous_rastrigin
 x rastrigin
 x parabola # alias for sphere
@@ -78,6 +79,16 @@ x tripod
 x trefethen4
 x three_hump_camel_back
 x dixon_price
+x beale
+x branin
+x colville
+x styblinski_tang
+x powell
+x shekel
+x forrester
+x hartmann_3d
+x hartmann_4d
+x hartmann_6d
 ```
 
 ## Contributions

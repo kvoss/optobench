@@ -71,7 +71,7 @@ PYWRAP(shubert);
 PYWRAP(sphere);
 PYWRAP(tripod);
 PYWRAP(trefethen4);
-PYWRAP(threeHumpCamel);
+PYWRAP(three_hump_camel_back);
 PYWRAP(dixonPrice);
 
 
@@ -111,7 +111,7 @@ CBenchMethods[] = {
     {"sphere", py_sphere, METH_VARARGS, "sphere function"},
     {"tripod", py_tripod, METH_VARARGS, "tripod function"},
     {"trefethen4", py_trefethen4, METH_VARARGS, "trefethen4 function"},
-    {"threeHumpCamel", py_threeHumpCamel, METH_VARARGS, "three hump camel function"},
+    {"three_hump_camel_back", py_three_hump_camel_back, METH_VARARGS, "three hump camel function"},
     {"dixonPrice", py_dixonPrice, METH_VARARGS, "dixon price function"},
     {NULL, NULL, 0, NULL}
 };

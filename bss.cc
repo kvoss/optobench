@@ -557,7 +557,7 @@ trefethen4(const std::vector<double>& xs)
 
 //Valley Functions
 double
-threeHumpCamel(const std::vector<double>& xs)
+three_hump_camel_back(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);
     double x2 = xs.at(1);

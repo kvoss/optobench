@@ -37,7 +37,7 @@ double sphere(const std::vector<double>& xs);
 double parabola(const std::vector<double>& xs);
 double tripod(const std::vector<double>& xs);
 double trefethen4(const std::vector<double>& xs);
-double threeHumpCamel(const std::vector<double>& xs);
+double three_hump_camel_back(const std::vector<double>& xs);
 double dixonPrice(const std::vector<double>& xs);
 
 #endif // _BSS_H

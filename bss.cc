@@ -267,6 +267,25 @@ perm0db(const std::vector<double>& xs)
 }
 
 double
+permdb(const std::vector<double>& xs)
+{
+    const double B = .5;
+    std::size_t len_xs = xs.size();
+
+    double ret = .0;
+    for (std::size_t i=0; i < len_xs; ++i) {
+        double lret = .0;
+        for (std::size_t j=0; j < len_xs; ++j) {
+            lret += (std::pow(j+1, i+1) + B)
+                * (std::pow(xs[j]/(j+1.), i+1.) - 1.);
+        }
+        lret *= lret;
+        ret += lret;
+    }
+    return ret;
+}
+
+double
 non_cont_rastrigin(const std::vector<double>& xs)
 {
     double acc = 10. * xs.size();

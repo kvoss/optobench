@@ -62,6 +62,7 @@ x sum_squares # alias for axis_parallel_hyperellipsoid
 x trid
 x michalewicz
 x perm0db
+x permdb
 x noncontinuous_rastrigin
 x rastrigin
 x parabola # alias for sphere

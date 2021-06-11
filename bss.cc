@@ -643,6 +643,62 @@ dixon_price(const std::vector<double>& xs)
     return ret;
 }
 
+// Other functions
+double
+beale(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(1.5 - x1 + x1*x2)
+        + SQ(2.25 - x1 + x1 * SQ(x2))
+        + SQ(2.625 - x1 + x1 * x2 * SQ(x2));
+    return ret;
+}
+
+double
+branin(const std::vector<double>& xs)
+{
+    const double
+        a = 1.,
+        b = 5.1 / (4 * SQ(pi)),
+        c = 5. / pi,
+        r = 6.,
+        s = 10.,
+        t = 1. / 8 / pi;
+
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = s
+        + a * SQ(x2 - b*SQ(x1) + c*x1 - r)
+        + s * (1. - t) * std::cos(x1);
+    return ret;
+}
+
+double
+colville(const std::vector<double>& xs)
+{
+    // 4 dimensional
+    double ret =
+        100. * SQ(SQ(xs.at(0)) - xs.at(1))
+        + SQ(xs.at(0) - 1.)
+        + SQ(xs.at(2) - 1.)
+        + 90. * SQ(SQ(xs.at(2)) - xs.at(3))
+        + 10.1 * (SQ(xs.at(1) - 1.) + SQ(xs.at(3) - 1.))
+        + 19.8 * (xs.at(1) - 1.) * (xs.at(3) - 1.);
+    return ret;
+}
+
+double
+styblinski_tang(const std::vector<double>& xs)
+{
+    double ret = 0.;
+    for (auto &&x: xs) {
+        ret += SQ(x) * SQ(x) - 16.*SQ(x) + 5.*x;
+    }
+    ret /= 2.;
+    return ret;
+}
+
 // int
 // main (int argc, char** argv)
 // {

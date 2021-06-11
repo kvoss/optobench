@@ -45,6 +45,10 @@ double tripod(const std::vector<double>& xs);
 double trefethen4(const std::vector<double>& xs);
 double three_hump_camel_back(const std::vector<double>& xs);
 double dixon_price(const std::vector<double>& xs);
+double beale(const std::vector<double>& xs);
+double branin(const std::vector<double>& xs);
+double colville(const std::vector<double>& xs);
+double styblinski_tang(const std::vector<double>& xs);
 
 #endif // _BSS_H
 

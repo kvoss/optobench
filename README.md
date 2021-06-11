@@ -78,6 +78,10 @@ x tripod
 x trefethen4
 x three_hump_camel_back
 x dixon_price
+x beale
+x branin
+x colville
+x styblinski_tang
 ```
 
 ## Contributions

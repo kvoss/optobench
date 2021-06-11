@@ -79,6 +79,10 @@ PYWRAP(tripod);
 PYWRAP(trefethen4);
 PYWRAP(three_hump_camel_back);
 PYWRAP(dixon_price);
+PYWRAP(beale);
+PYWRAP(branin);
+PYWRAP(colville);
+PYWRAP(styblinski_tang);
 
 
 static PyMethodDef
@@ -128,6 +132,10 @@ CBenchMethods[] = {
     {"trefethen4", py_trefethen4, METH_VARARGS, "trefethen4 function"},
     {"three_hump_camel_back", py_three_hump_camel_back, METH_VARARGS, "three hump camel function"},
     {"dixon_price", py_dixon_price, METH_VARARGS, "dixon price function"},
+    {"beale", py_beale, METH_VARARGS, "beale function"},
+    {"branin", py_branin, METH_VARARGS, "branin function"},
+    {"colville", py_colville, METH_VARARGS, "colville function"},
+    {"styblinski_tang", py_styblinski_tang, METH_VARARGS, "styblinski_tang function"},
     {NULL, NULL, 0, NULL}
 };
 

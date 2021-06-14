@@ -89,6 +89,11 @@ x forrester
 x hartmann_3d
 x hartmann_4d
 x hartmann_6d
+x booth
+x matyas
+x mccormick
+x power_sum
+x zakharov
 ```
 
 ## Contributions

@@ -90,6 +90,11 @@ PYWRAP(forrester);
 PYWRAP(hartmann_3d);
 PYWRAP(hartmann_4d);
 PYWRAP(hartmann_6d);
+PYWRAP(booth);
+PYWRAP(matyas);
+PYWRAP(mccormick);
+PYWRAP(power_sum);
+PYWRAP(zakharov);
 
 static PyMethodDef
 CBenchMethods[] = {
@@ -149,6 +154,11 @@ CBenchMethods[] = {
     {"hartmann_3d", py_hartmann_3d, METH_VARARGS, "Hartmann_3d function"},
     {"hartmann_4d", py_hartmann_4d, METH_VARARGS, "Hartmann_4d function"},
     {"hartmann_6d", py_hartmann_6d, METH_VARARGS, "Hartmann_6d function"},
+    {"booth", py_booth, METH_VARARGS, "Booth function"},
+    {"matyas", py_matyas, METH_VARARGS, "Matyas function"},
+    {"mccormick", py_mccormick, METH_VARARGS, "McCormick function"},
+    {"power_sum", py_power_sum, METH_VARARGS, "power_sum function"},
+    {"zakharov", py_zakharov, METH_VARARGS, "Zakharov function"},
     {NULL, NULL, 0, NULL}
 };
 

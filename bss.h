@@ -56,6 +56,11 @@ double forrester(const std::vector<double>& xs);
 double hartmann_3d(const std::vector<double>& xs);
 double hartmann_4d(const std::vector<double>& xs);
 double hartmann_6d(const std::vector<double>& xs);
+double booth(const std::vector<double>& xs);
+double matyas(const std::vector<double>& xs);
+double mccormick(const std::vector<double>& xs);
+double power_sum(const std::vector<double>& xs);
+double zakharov(const std::vector<double>& xs);
 
 #endif // _BSS_H
 

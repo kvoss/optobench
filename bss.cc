@@ -855,6 +855,66 @@ hartmann_6d(const std::vector<double>& xs)
     return ret;
 }
 
+double
+booth(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = SQ(x1 + 2.*x2 - 7.)
+        + SQ(2.*x1 + x2 - 5.);
+    return ret;
+}
+
+double
+matyas(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = 0.26*(SQ(x1) + SQ(x2))
+        - 0.48*x1*x2;
+    return ret;
+}
+
+double
+mccormick(const std::vector<double>& xs)
+{
+    double x1 = xs.at(0);
+    double x2 = xs.at(1);
+    double ret = 1. + std::sin(x1 + x2)
+        + SQ(x1 - x2) - 1.5*x1 + 2.5*x2;
+    return ret;
+}
+
+double
+power_sum(const std::vector<double>& xs)
+{
+    // d-dimensional, but requires a b vector
+    // TODO: currently only supporting 4-d
+    const double b[] = {8., 18., 44., 114.};
+
+    double ret = 0.;
+    for (std::size_t i=0; i<4; ++i) {
+        double lret = -1. * b[i];
+        for (std::size_t j=0; j<4; ++j)
+            lret += std::pow(xs.at(j), i+1.);
+        ret += SQ(lret);
+    }
+    return ret;
+}
+
+double
+zakharov(const std::vector<double>& xs)
+{
+    double acc0=.0, acc1=.0;
+    for (std::size_t i=0; i<xs.size(); ++i) {
+        acc0 += SQ(xs[i]);
+        acc1 += (i+1.) * xs[i];
+    }
+    acc1 /= 2.;
+    double ret = acc0 + SQ(acc1) + SQ(SQ(acc1));
+}
+
+
 // int
 // main (int argc, char** argv)
 // {

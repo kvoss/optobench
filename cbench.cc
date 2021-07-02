@@ -261,7 +261,7 @@ PyMODINIT_FUNC
 PyInit_optobench(void)
 {
     PyObject *module = PyModule_Create(&cModPyDem);
-    PyModule_AddStringConstant(module, "__version__", "0.2.0");
+    PyModule_AddStringConstant(module, "__version__", "0.2.2");
     import_array();     // initialize NumPy C-API
                         // PyError if not successful
     return module;

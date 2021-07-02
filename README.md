@@ -15,11 +15,26 @@ import cbench as cb
 
 xs = [.1, .2, .3, .4, .5]
 print(cb.michalewicz(xs))
+
+
+import numpy as np
+
+nxs = np.array(xs)
+print(cb.michalewicz(nxs))
+
+nxss = np.array(
+    [[0.4 , 0.31 , 0.445, 0.218, 0.581, 0.171, 0.532, 0.24 ],
+    [0.265, 0.43 , 0.568, 0.144, 0.4  , 0.333, 0.188, 0.402],
+    [0.191, 0.366, 0.234, 0.272, 0.307, 0.436, 0.203, 0.361],
+    [0.262, 0.254, 0.407, 0.254, 0.254, 0.335, 0.169, 0.265],
+    [0.362, 0.097, 0.167, 0.269, 0.395, 0.659, 0.234, 0.127]])
+print(cb.michalewicz(nxss))
 ```
 
 ### Requirements
 
 - Python 3.8
+- numpy>=1.18
 - g++ / clang with support for C++17
 
 
@@ -27,7 +42,10 @@ print(cb.michalewicz(xs))
 
 ```sh
 # Load your python environment
-make install
+
+make          # build loadable module in a local directory
+make install  # build module and install in current environment
+make test     # run tests
 ```
 
 

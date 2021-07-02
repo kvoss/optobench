@@ -1,10 +1,12 @@
 from distutils.core import setup, Extension
+import numpy as np
 # import sysconfig
 
 # extra_compile_args = sysconfig.get_config_var('CXXFLAGS').split()
 extra_compile_args = []
-extra_compile_args += ['-std=c++17', '-Wall', '-Wextra']
-
+numpy_include_dir = np.get_include()
+extra_compile_args += ['-std=c++17', '-Wall', '-Wextra', '-I{0}'.format(numpy_include_dir)]
+extra_link_args = []  # '-L/usr/lib/python3/dist-packages/numpy/core/lib/']
 setup(name='cbench',
       version='0.1.0',
       author='K. Voss',
@@ -20,6 +22,7 @@ setup(name='cbench',
           Extension('cbench',
                     ['cbench.cc', 'bss.cc'],
                     extra_compile_args=extra_compile_args,
+                    extra_link_args=extra_link_args,
                     libraries=['stdc++'],
                     language='c++17'
           )

@@ -1,22 +1,19 @@
 #define PY_SSIZE_T_CLEAN  /* Make "s#" use Py_ssize_t rather than int. */
 #include "Python.h"
+#include <stdexcept>
+
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+#include "numpy/arrayobject.h"
+// #include "numpy/arrayscalars.h"
+
 #include "bss.h"
 
-
 static PyObject *
-py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
+handle_list(PyObject *lst, double (*fun)(const std::vector<double>&))
 {
-    PyObject *lst;
-    if (!PyArg_ParseTuple(args, "O", &lst))
-        return NULL;
-    if (!PyList_Check(lst)) {
-        PyErr_SetString(PyExc_TypeError, "expected a list");
-        return NULL;
-    }
-
     Py_ssize_t len = PyList_Size(lst);
-    if (len < 2) {
-        PyErr_SetString(PyExc_ValueError, "expected a list of length >=2");
+    if (len < 1) {
+        PyErr_SetString(PyExc_ValueError, "Expected a list of length >=1");
         return NULL;
     }
 
@@ -27,10 +24,94 @@ py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
         double d = PyFloat_AsDouble(px);
         xs.push_back(d);
     }
+    try {
+        double ret = fun(xs);
+        PyObject *v = PyFloat_FromDouble(ret);
+        return v;
+    } catch (const std::out_of_range& e) {
+        PyErr_SetString(PyExc_ValueError, "invalid argument: check minimal vector size");
+    } catch ( ... ) {
+        PyErr_SetString(PyExc_ValueError, "invalid argument");
+    }
+    return NULL;
+}
 
-    double ret = fun(xs);
-    PyObject *v = Py_BuildValue("d", ret);
-    return v;
+static PyObject *
+handle_numpy(PyObject *lst, double (*fun)(const std::vector<double>&))
+{
+    PyArrayObject* arr = reinterpret_cast<PyArrayObject*>(lst);
+
+    int is_cont = PyArray_IS_C_CONTIGUOUS(arr);
+    if (!is_cont) {
+        PyErr_SetString(PyExc_ValueError, "Expected continuous C array");
+        return NULL;
+    }
+    // int nd_flags = PyArray_FLAGS(arr);
+    // int is_carr = PyArray_ISCARRAY(arr);
+
+    int arr_type = PyArray_TYPE(arr);
+    if (arr_type != NPY_FLOAT64) {
+        PyErr_SetString(PyExc_ValueError, "Expected float64 array type");
+        return NULL;
+    }
+
+    const double *p = (double*)PyArray_DATA(arr);
+    int ND = (int) PyArray_NDIM(arr);
+    if (ND == 1) {
+        int N = (int) PyArray_DIM(arr, 0);
+        std::vector<double>xs;
+        xs.assign(p, p+N);
+        double ret = nan("");
+        try {
+            ret = fun(xs);
+            PyObject *v = PyFloat_FromDouble(ret);
+            return v;
+        } catch ( ... ) {
+            PyErr_SetString(PyExc_ValueError, "invalid argument");
+        }
+    } else if (ND == 2) {
+        int N = (int) PyArray_DIM(arr, 1);
+        int n_rows = (int) PyArray_DIM(arr, 0);
+        double *buf = new double[n_rows];  // XXX: TODO: check for memory leaks
+        for (int idx=0; idx<n_rows; ++idx) {
+            std::vector<double> xs;
+            xs.assign(p+idx*N, p+N+idx*N);
+            double ret = nan("");
+            try {
+                ret = fun(xs);
+            } catch ( ... ) {
+            }
+            buf[idx] = ret;
+        }
+        npy_intp dims[1] = { n_rows };
+        PyObject* array = PyArray_SimpleNewFromData(
+                1, dims,  NPY_FLOAT64, (void*)buf);
+        if (!array) throw std::runtime_error("Unknown failure in py_bench");
+        // ((PyArrayObject*)array)->flags |= NPY_OWNDATA;
+        return array;
+    } else {
+        PyErr_SetString(PyExc_ValueError, "Unexpected array shape; try 1d or 2d float64 arrays");
+    }
+    return NULL;
+}
+
+static PyObject *
+py_bench(PyObject *, PyObject *args, double (*fun)(const std::vector<double>&))
+{
+    PyObject *lst;
+    if (!PyArg_ParseTuple(args, "O", &lst))
+        return NULL;
+
+    bool is_list = PyList_Check(lst);
+    if (is_list)
+        return handle_list(lst, fun);
+
+    bool is_array = PyArray_Check(lst);
+    if (is_array)
+        return handle_numpy(lst, fun);
+
+    PyErr_SetString(PyExc_TypeError, "Expected a list or a numpy array");
+    return NULL;
 }
 
 #ifndef PYWRAP
@@ -180,6 +261,8 @@ PyInit_cbench(void)
 {
     PyObject *module = PyModule_Create(&cModPyDem);
     PyModule_AddStringConstant(module, "__version__", "0.1.0");
+    import_array();     // initialize NumPy C-API
+                        // PyError if not successful
     return module;
 }
 

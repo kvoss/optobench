@@ -41,8 +41,18 @@ print(cb.michalewicz(nxss))
 ### Installation
 
 ```sh
-# Load your python environment
+# First, load your python environment
 
+# Next
+pip install optobench
+```
+
+
+#### From source
+```sh
+# First, load your python environment
+
+# Next
 make          # build loadable module in a local directory
 make install  # build module and install in current environment
 make test     # run tests

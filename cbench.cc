@@ -80,6 +80,7 @@ handle_numpy(PyObject *lst, double (*fun)(const std::vector<double>&))
             try {
                 ret = fun(xs);
             } catch ( ... ) {
+                // TODO: inform user
             }
             buf[idx] = ret;
         }
@@ -247,7 +248,7 @@ CBenchMethods[] = {
 static struct PyModuleDef
 cModPyDem = {
     PyModuleDef_HEAD_INIT,
-    "cbench", /* name of the module */
+    "optobench", /* name of the module */
     "Python interface for the C++ benchmark optimization functions",  /* module documentation, may be NULL */
     -1,       /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
     CBenchMethods
@@ -257,10 +258,10 @@ cModPyDem = {
 // Module initialization
 // Python 3.x
 PyMODINIT_FUNC
-PyInit_cbench(void)
+PyInit_optobench(void)
 {
     PyObject *module = PyModule_Create(&cModPyDem);
-    PyModule_AddStringConstant(module, "__version__", "0.1.0");
+    PyModule_AddStringConstant(module, "__version__", "0.2.0");
     import_array();     // initialize NumPy C-API
                         // PyError if not successful
     return module;

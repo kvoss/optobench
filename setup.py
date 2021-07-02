@@ -61,7 +61,7 @@ def get_requirements():
 
 
 setup(name='optobench',
-      version='0.2.0',
+      version='0.2.2',
       author='K. Voss',
       author_email='k.voss@usask.ca',
       url='https://github.com/kvoss/optobench',

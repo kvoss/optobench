@@ -505,7 +505,7 @@ step(const std::vector<double>& xs)
     double ret = 0.;
     for (auto &&x: xs) {
         double t = std::floor(x) + 0.5;
-        ret += t * t;
+        ret += SQ(t);
     }
     return ret;
 }
@@ -912,6 +912,7 @@ zakharov(const std::vector<double>& xs)
     }
     acc1 /= 2.;
     double ret = acc0 + SQ(acc1) + SQ(SQ(acc1));
+    return ret;
 }
 
 

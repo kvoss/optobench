@@ -10,5 +10,7 @@ clean:
 	-rm *.so
 
 test:
-	@sh ./testit.sh
+	#@sh ./testit.sh
+	@python3 ./tt.py
+
 

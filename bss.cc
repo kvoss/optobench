@@ -3,8 +3,8 @@
 #include "bss.h"
 
 namespace {
-const double e = std::exp(1.);
-const double pi = std::acos(-1.);
+constexpr double e = std::exp(1.);
+constexpr double pi = std::acos(-1.);
 }
 
 
@@ -15,7 +15,7 @@ double
 ackley(const std::vector<double>& xs)
 {
     double acc0 = 0., acc1 = 0.;
-    for (auto &&x: xs) {
+    for (auto& x: xs) {
         acc0 += SQ(x);
         acc1 += std::cos(2.*pi*x);
     }
@@ -31,7 +31,7 @@ double
 alpine(const std::vector<double>& xs)
 {
     double acc0 = 0.;
-    for (auto &&x: xs) {
+    for (auto& x: xs) {
         acc0 += std::abs(x*std::sin(x) + 0.1*x);
     }
     return acc0;
@@ -205,7 +205,7 @@ six_hump_camel_back(const std::vector<double>& xs)
     return ret;
 }
 
-double 
+double
 dejong5(const std::vector<double>& xs)
 {
     static const double a[] = {
@@ -641,7 +641,7 @@ three_hump_camel_back(const std::vector<double>& xs)
     double x1 = xs.at(0);
     double x2 = xs.at(1);
 
-    double ret = (2 * SQ(x1)) 
+    double ret = (2 * SQ(x1))
         - (1.05  * std::pow(x1, 4))
         + (std::pow(x1, 6) / 6)
         + (x1 * x2)
@@ -649,7 +649,7 @@ three_hump_camel_back(const std::vector<double>& xs)
     return ret;
 }
 
-double 
+double
 dixon_price(const std::vector<double>& xs)
 {
     double x1 = xs.at(0);
@@ -922,7 +922,7 @@ zakharov(const std::vector<double>& xs)
 //     double sum = 0.;
 //     std::vector<double> v{-3., 17.};
 //     std::vector<double> v2{-3., 17., 18};
-// 
+//
 //     for (size_t n=0; n<1'000'000; ++n) {
 //         sum += ackley(v2);
 //         sum += alpine(v2);
@@ -932,4 +932,3 @@ zakharov(const std::vector<double>& xs)
 //     std::cout << sum << std::endl;
 //     return 0;
 // }
-
